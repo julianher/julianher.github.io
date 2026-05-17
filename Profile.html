@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Julian Hernandez — Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ---------- Profile header card ---------- */
+  .profile-card {
+    position: relative;
+    border: 1px solid var(--rule);
+    background: var(--bg);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .banner {
+    height: 168px;
+    width: 100%;
+    background: var(--bg-deep);
+    position: relative;
+    overflow: hidden;
+  }
+  /* hairline pattern on banner */
+  .banner::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(0deg, transparent 0 23px, color-mix(in oklab, var(--accent) 8%, transparent) 23px 24px),
+      linear-gradient(90deg, transparent 0 23px, color-mix(in oklab, var(--ink) 4%, transparent) 23px 24px);
+    background-size: 24px 24px;
+    opacity: 0.7;
+  }
+  .banner img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .header-body {
+    position: relative;
+    padding: 0 36px 32px;
+  }
+
+  .avatar-wrap {
+    position: relative;
+    margin-top: -64px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .avatar {
+    width: 132px;
+    height: 132px;
+    border-radius: 50%;
+    border: 5px solid var(--bg);
+    background: var(--bg-sunk);
+    overflow: hidden;
+    box-shadow: 0 1px 0 var(--rule-strong);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+  }
+  /* Initials shown when no photo is present */
+  .avatar-initials {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 38px;
+    color: var(--ink-mute);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .badge-strip {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .badge {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    background: var(--bg-sunk);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 4px 9px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .badge .pip {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .badge.open .pip {
+    background: oklch(0.65 0.13 145);
+    box-shadow: 0 0 0 3px color-mix(in oklab, oklch(0.65 0.13 145) 20%, transparent);
+  }
+
+  h1.name {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(40px, 5.5vw, 58px);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    margin: 0 0 8px;
+    color: var(--ink);
+    font-variation-settings: "opsz" 60;
+  }
+  h1.name .period { color: var(--accent); }
+
+  .headline {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    margin: 0 0 18px;
+    max-width: none;
+    text-wrap: balance;
+    letter-spacing: -0.005em;
+  }
+  .headline .pipe {
+    color: var(--rule-strong);
+    margin: 0 8px;
+    font-weight: 300;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 22px;
+  }
+  .meta-row .sep {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--rule-strong);
+  }
+
+  .header-social {
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+  .header-social .next-link {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--accent);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+    padding-bottom: 1px;
+    transition: gap 0.18s ease;
+  }
+  .header-social .next-link:hover { gap: 10px; }
+
+  /* ---------- Education list ---------- */
+  .edu-list {
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .edu-item {
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: 72px 1fr auto;
+    gap: 24px;
+    align-items: start;
+    border-top: 1px solid var(--rule);
+  }
+  .edu-item:first-child { border-top: none; }
+
+  .edu-mark {
+    width: 64px;
+    height: 64px;
+    border-radius: 4px;
+    background: var(--bg-deep);
+    border: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 19px;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+  .edu-body { min-width: 0; }
+  .edu-body h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin: 0 0 4px;
+    color: var(--ink);
+  }
+  .edu-body .deg {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--ink-mute);
+    margin: 0 0 14px;
+  }
+  .edu-detail {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0 0 6px;
+    text-wrap: pretty;
+    max-width: 56ch;
+  }
+  .edu-detail .k {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-right: 6px;
+  }
+  .edu-detail strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .edu-meta {
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    line-height: 1.6;
+    white-space: nowrap;
+  }
+  .edu-meta .year {
+    color: var(--accent);
+    font-weight: 500;
+    font-size: 12px;
+  }
+  .edu-meta .ribbon {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 3px 8px;
+    border: 1px solid var(--rule-strong);
+    border-radius: 2px;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Projects ---------- */
+  .projects {
+    display: flex;
+    flex-direction: column;
+  }
+  .project {
+    padding: 36px 0;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  .project:first-of-type { padding-top: 0; border-top: none; }
+  .project-index {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--ink-mute);
+    padding-top: 6px;
+  }
+  .project-index .slash { color: var(--rule-strong); margin: 0 2px; }
+  .project-body { min-width: 0; }
+  .project h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.2;
+    letter-spacing: -0.012em;
+    margin: 0 0 6px;
+    color: var(--ink);
+  }
+  .project .subtitle {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 17px;
+    color: var(--ink-mute);
+    margin: 0 0 16px;
+  }
+  .project .desc {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0 0 20px;
+    text-wrap: pretty;
+    max-width: 56ch;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0 0 20px;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    color: var(--ink-soft);
+    background: var(--bg-sunk);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 3px 8px;
+  }
+  .project-link {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--accent);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+    padding-bottom: 1px;
+    transition: gap 0.18s ease, border-color 0.15s ease;
+  }
+  .project-link:hover { border-color: var(--accent); gap: 10px; }
+  .project-link .arrow { display: inline-block; transition: transform 0.18s ease; }
+  .project-link:hover .arrow { transform: translateX(2px); }
+
+  @media (max-width: 700px) {
+    .header-body { padding: 0 22px 24px; }
+    .avatar-wrap { margin-top: -52px; gap: 16px; }
+    .avatar { width: 104px; height: 104px; border-width: 4px; }
+    .edu-item {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      padding: 22px;
+    }
+    .edu-meta { text-align: left; white-space: normal; }
+    .project {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 32px 0;
+    }
+    .project-index { padding-top: 0; }
+    .project h3 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+  <main class="page wide">
+
+    <div class="topnav">
+      <span class="brand"><span class="dot"></span>Julian Hernandez</span>
+      <nav aria-label="Primary">
+        <a href="Profile.html" aria-current="page">Profile</a>
+        <a href="Projects.html">Projects</a>
+        <a href="Contact.html">Contact</a>
+      </nav>
+    </div>
+
+    <!-- ============ PROFILE HEADER ============ -->
+    <section class="profile-card" aria-label="Profile header" style="margin-top:0;">
+      <!-- Banner: replace with <img src="cover.jpg" alt=""> to add a cover photo -->
+      <div class="banner" aria-hidden="true"></div>
+
+      <div class="header-body">
+        <div class="avatar-wrap">
+          <div class="avatar">
+            <!-- Replace this span with <img src="photo.jpg" alt="Julian Hernandez"> to add your photo -->
+            <span class="avatar-initials" aria-hidden="true">JH</span>
+          </div>
+          <div class="badge-strip">
+            <span class="badge open"><span class="pip"></span>Open to full-time roles</span>
+            <span class="badge">Miami, FL</span>
+          </div>
+        </div>
+
+        <h1 class="name">Julian Hernandez<span class="period">.</span></h1>
+        <p class="headline">STEM MBA <span class="pipe">|</span> Business Analytics <span class="pipe">|</span> Artificial Intelligence <span class="pipe">|</span> Digital Transformation</p>
+
+        <div class="meta-row">
+          <span>Miami, Florida — United States of America</span>
+        </div>
+
+        <div class="header-social">
+          <nav class="social" aria-label="Social links">
+            <a href="https://linkedin.com" rel="noopener">LinkedIn</a>
+            <span class="sep">·</span>
+            <a href="https://github.com" rel="noopener">GitHub</a>
+            <span class="sep">·</span>
+            <a href="mailto:julian3197@gmail.com">julian3197@gmail.com</a>
+          </nav>
+          <a class="next-link" href="Projects.html">See selected work <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EDUCATION ============ -->
+    <section aria-labelledby="edu-heading">
+      <div class="section-label"><span class="num">01</span><span>Education</span></div>
+      <h2 class="section-title" id="edu-heading">Where I studied.</h2>
+
+      <div class="edu-list">
+
+        <div class="edu-item">
+          <div class="edu-mark" aria-hidden="true">FIU</div>
+          <div class="edu-body">
+            <h3>FIU Chapman Graduate School of Business</h3>
+            <p class="deg">Master of Business Administration — MBA, Business Analytics</p>
+            <p class="edu-detail"><span class="k">GPA</span><strong>3.98 / 4.00</strong></p>
+            <p class="edu-detail"><span class="k">Skills</span>Artificial Intelligence Strategy, Data Warehousing, Data Visualization</p>
+          </div>
+          <div class="edu-meta">
+            <div class="year">Jan 2025 — May 2026</div>
+            <div>Miami, FL</div>
+            <div class="ribbon">Latest milestone</div>
+          </div>
+        </div>
+
+        <div class="edu-item">
+          <div class="edu-mark" aria-hidden="true">UNAL</div>
+          <div class="edu-body">
+            <h3>Universidad Nacional de Colombia</h3>
+            <p class="deg">Engineer, Mechatronics</p>
+            <p class="edu-detail"><span class="k">Skills</span>Artificial Intelligence Techniques, Robotics</p>
+          </div>
+          <div class="edu-meta">
+            <div class="year">2016 — Jun 2022</div>
+            <div>Bogotá, CO</div>
+          </div>
+        </div>
+
+        <div class="edu-item">
+          <div class="edu-mark" aria-hidden="true">TUM</div>
+          <div class="edu-body">
+            <h3>Technical University of Munich</h3>
+            <p class="deg">Exchange Semester in Artificial Intelligence</p>
+            <p class="edu-detail"><span class="k">Skills</span>Deep Learning, Robot Motion Planning</p>
+          </div>
+          <div class="edu-meta">
+            <div class="year">Apr 2021 — Oct 2021</div>
+            <div>Munich, DE</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section aria-labelledby="projects-heading">
+      <div class="section-label"><span class="num">02</span><span>Selected work</span></div>
+      <h2 class="section-title" id="projects-heading">Three projects.</h2>
+
+      <div class="projects">
+
+        <article class="project">
+          <div class="project-index">001<span class="slash">/</span>03</div>
+          <div class="project-body">
+            <h3>Tableau Dashboard</h3>
+            <p class="subtitle">Interactive business intelligence dashboard.</p>
+            <p class="desc">
+              Built in Tableau Public to surface key metrics and trends in a clean, scannable layout. The goal was less "show every chart" and more "give a non-analyst a five-second read on what's moving." Filters and breakdowns are designed so the obvious questions are one click away.
+            </p>
+            <div class="tags">
+              <span class="tag">Tableau</span>
+              <span class="tag">SQL</span>
+            </div>
+            <a class="project-link" href="#">View project <span class="arrow">→</span></a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-index">002<span class="slash">/</span>03</div>
+          <div class="project-body">
+            <h3>AI Chatbot Demo</h3>
+            <p class="subtitle">Conversational assistant, walked through on video.</p>
+            <p class="desc">
+              An end-to-end build of an LLM-powered chatbot, documented as a YouTube walkthrough. I wanted to show, concretely, how language models can sit alongside an analyst's workflow — drafting queries, summarizing tables, and surfacing follow-up questions worth asking.
+            </p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">LLM APIs</span>
+              <span class="tag">Video walkthrough</span>
+            </div>
+            <a class="project-link" href="#">View project <span class="arrow">→</span></a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-index">003<span class="slash">/</span>03</div>
+          <div class="project-body">
+            <h3>ML Notebooks</h3>
+            <p class="subtitle">Applied machine learning on real datasets.</p>
+            <p class="desc">
+              A set of Google Colab notebooks working through Random Forest and Linear Regression on real-world data. Each notebook walks through the full loop — cleaning, feature choices, model fit, evaluation — with written commentary on what worked, what didn't, and what I'd try next.
+            </p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">scikit-learn</span>
+              <span class="tag">pandas</span>
+              <span class="tag">Colab</span>
+            </div>
+            <a class="project-link" href="#">View project <span class="arrow">→</span></a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <footer class="foot">
+      <span>Julian Hernandez · Data Analyst</span>
+      <span><a href="Projects.html" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--rule-strong);">Next: Projects →</a></span>
+    </footer>
+
+  </main>
+</body>
+</html>

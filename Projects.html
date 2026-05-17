@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Julian Hernandez — Projects</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  /* ---- intro ---- */
+  .intro {
+    margin-bottom: 56px;
+  }
+  .intro .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .intro .eyebrow .num { color: var(--accent); font-weight: 500; }
+  .intro h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(40px, 5.5vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.022em;
+    margin: 0 0 18px;
+    color: var(--ink);
+    font-variation-settings: "opsz" 60;
+  }
+  .intro h1 .period { color: var(--accent); }
+  .intro p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 21px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  /* ---- projects ---- */
+  .projects {
+    display: flex;
+    flex-direction: column;
+  }
+  .project {
+    padding: 44px 0;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  .project:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .project-index {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--ink-mute);
+    padding-top: 8px;
+  }
+  .project-index .slash { color: var(--rule-strong); margin: 0 2px; }
+
+  .project-body { min-width: 0; }
+
+  .project h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1.2;
+    letter-spacing: -0.012em;
+    margin: 0 0 6px;
+    color: var(--ink);
+  }
+  .project .subtitle {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 17px;
+    color: var(--ink-mute);
+    margin: 0 0 18px;
+  }
+  .project .desc {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0 0 22px;
+    text-wrap: pretty;
+    max-width: 56ch;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0 0 22px;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    color: var(--ink-soft);
+    background: var(--bg-sunk);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 3px 8px;
+  }
+
+  .project-link {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--accent);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+    padding-bottom: 1px;
+    transition: gap 0.18s ease, border-color 0.15s ease;
+  }
+  .project-link:hover {
+    border-color: var(--accent);
+    gap: 10px;
+  }
+  .project-link .arrow {
+    display: inline-block;
+    transition: transform 0.18s ease;
+  }
+  .project-link:hover .arrow { transform: translateX(2px); }
+
+  /* ---- outro ---- */
+  .outro {
+    margin-top: 80px;
+    padding: 32px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .outro .line {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 19px;
+    color: var(--ink-soft);
+  }
+  .outro a {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+    padding-bottom: 1px;
+  }
+  .outro a:hover { border-color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .project {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 36px 0;
+    }
+    .project-index { padding-top: 0; }
+    .project h3 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+  <main class="page">
+
+    <div class="topnav">
+      <span class="brand"><span class="dot"></span>Julian Hernandez</span>
+      <nav aria-label="Primary">
+        <a href="Profile.html">Profile</a>
+        <a href="Projects.html" aria-current="page">Projects</a>
+        <a href="Contact.html">Contact</a>
+      </nav>
+    </div>
+
+    <header class="intro">
+      <div class="eyebrow"><span class="num">02</span><span>Selected work</span></div>
+      <h1>Three projects<span class="period">.</span></h1>
+      <p>A small, honest sample of recent work — a dashboard, an LLM demo, and a set of ML notebooks.</p>
+    </header>
+
+    <div class="projects">
+
+      <article class="project">
+        <div class="project-index">001<span class="slash">/</span>03</div>
+        <div class="project-body">
+          <h3>Tableau Dashboard</h3>
+          <p class="subtitle">Interactive business intelligence dashboard.</p>
+          <p class="desc">
+            Built in Tableau Public to surface key metrics and trends in a clean, scannable layout. The goal was less "show every chart" and more "give a non-analyst a five-second read on what's moving." Filters and breakdowns are designed so the obvious questions are one click away.
+          </p>
+          <div class="tags">
+            <span class="tag">Tableau</span>
+            <span class="tag">SQL</span>
+          </div>
+          <a class="project-link" href="#">View project <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-index">002<span class="slash">/</span>03</div>
+        <div class="project-body">
+          <h3>AI Chatbot Demo</h3>
+          <p class="subtitle">Conversational assistant, walked through on video.</p>
+          <p class="desc">
+            An end-to-end build of an LLM-powered chatbot, documented as a YouTube walkthrough. I wanted to show, concretely, how language models can sit alongside an analyst's workflow — drafting queries, summarizing tables, and surfacing follow-up questions worth asking.
+          </p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">LLM APIs</span>
+            <span class="tag">Video walkthrough</span>
+          </div>
+          <a class="project-link" href="#">View project <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-index">003<span class="slash">/</span>03</div>
+        <div class="project-body">
+          <h3>ML Notebooks</h3>
+          <p class="subtitle">Applied machine learning on real datasets.</p>
+          <p class="desc">
+            A set of Google Colab notebooks working through Random Forest and Linear Regression on real-world data. Each notebook walks through the full loop — cleaning, feature choices, model fit, evaluation — with written commentary on what worked, what didn't, and what I'd try next.
+          </p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">scikit-learn</span>
+            <span class="tag">pandas</span>
+            <span class="tag">Colab</span>
+          </div>
+          <a class="project-link" href="#">View project <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="outro">
+      <span class="line">Want to talk about any of these?</span>
+      <a href="Contact.html">Get in touch →</a>
+    </div>
+
+    <footer class="foot">
+      <span>Julian Hernandez · Data Analyst</span>
+      <span><a href="Contact.html" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--rule-strong);">Next: Contact →</a></span>
+    </footer>
+
+  </main>
+</body>
+</html>

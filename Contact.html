@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Julian Hernandez — Contact</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .contact-page {
+    padding-top: 24px;
+  }
+
+  .contact-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .contact-eyebrow .num { color: var(--accent); font-weight: 500; }
+
+  h1.contact-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(44px, 6.5vw, 68px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    margin: 0 0 24px;
+    color: var(--ink);
+    font-variation-settings: "opsz" 60;
+  }
+  h1.contact-title .period { color: var(--accent); }
+
+  .lede {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 42ch;
+    margin: 0 0 56px;
+    text-wrap: pretty;
+  }
+
+  /* big email line */
+  .email-row {
+    padding: 36px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+  .email-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .email-value {
+    font-family: var(--serif);
+    font-size: clamp(24px, 3.4vw, 36px);
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .email-value a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 2px;
+    transition: color 0.15s ease;
+  }
+  .email-value a:hover { color: var(--accent); }
+
+  /* channels grid */
+  .channels {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 64px;
+  }
+  .channel {
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 22px 22px 20px;
+    background: var(--bg);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s ease, background 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .channel:hover {
+    border-color: var(--rule-strong);
+    background: var(--bg-sunk);
+  }
+  .channel .head {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .channel .name {
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.2;
+    color: var(--ink);
+    letter-spacing: -0.012em;
+  }
+  .channel .handle {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 2px;
+  }
+  .channel .arrow {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--accent);
+    font-family: var(--sans);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.18s ease;
+  }
+  .channel:hover .arrow { gap: 10px; }
+
+  /* availability block */
+  .avail {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: center;
+    padding: 24px 28px;
+    background: var(--bg-sunk);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+  }
+  .avail .left {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    text-wrap: pretty;
+  }
+  .avail .left strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .avail .status {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border: 1px solid var(--rule-strong);
+    border-radius: 100px;
+    background: var(--bg);
+  }
+  .avail .status .pip {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: oklch(0.65 0.13 145);
+    box-shadow: 0 0 0 3px color-mix(in oklab, oklch(0.65 0.13 145) 22%, transparent);
+  }
+
+  @media (max-width: 600px) {
+    .channels { grid-template-columns: 1fr; }
+    .email-row { padding: 28px 0; }
+    .avail { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <main class="page contact-page">
+
+    <div class="topnav">
+      <span class="brand"><span class="dot"></span>Julian Hernandez</span>
+      <nav aria-label="Primary">
+        <a href="Profile.html">Profile</a>
+        <a href="Projects.html">Projects</a>
+        <a href="Contact.html" aria-current="page">Contact</a>
+      </nav>
+    </div>
+
+    <div class="contact-eyebrow"><span class="num">03</span><span>Contact</span></div>
+    <h1 class="contact-title">Get in touch<span class="period">.</span></h1>
+    <p class="lede">
+      Short notes welcome. Roles, freelance projects, or just a dataset you can't make sense of — happy to hear about any of it.
+    </p>
+
+    <div class="email-row">
+      <span class="email-label">Email — best way</span>
+      <span class="email-value"><a href="mailto:julian3197@gmail.com">julian3197@gmail.com</a></span>
+    </div>
+
+    <div class="channels">
+      <a class="channel" href="https://linkedin.com" rel="noopener">
+        <span class="head">Professional</span>
+        <span class="name">LinkedIn</span>
+        <span class="handle">/in/julian-hernandez</span>
+        <span class="arrow">Open profile <span aria-hidden="true">→</span></span>
+      </a>
+      <a class="channel" href="https://github.com" rel="noopener">
+        <span class="head">Code</span>
+        <span class="name">GitHub</span>
+        <span class="handle">@julianhernandez</span>
+        <span class="arrow">Browse repos <span aria-hidden="true">→</span></span>
+      </a>
+      <a class="channel" href="mailto:julian3197@gmail.com">
+        <span class="head">Direct</span>
+        <span class="name">Email</span>
+        <span class="handle">julian3197@gmail.com</span>
+        <span class="arrow">Compose <span aria-hidden="true">→</span></span>
+      </a>
+    </div>
+
+    <div class="avail">
+      <div class="left">
+        Currently <strong>open to full-time data analyst roles</strong> — Miami-based, remote, or hybrid. Typical reply within a day.
+      </div>
+      <span class="status"><span class="pip"></span>Available</span>
+    </div>
+
+    <footer class="foot">
+      <span>Julian Hernandez · Miami · MMXXVI</span>
+      <span><a href="Profile.html" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--rule-strong);">← Back to Profile</a></span>
+    </footer>
+
+  </main>
+</body>
+</html>
