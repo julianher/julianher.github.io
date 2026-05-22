@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Julian Hernandez · H1B Strategic Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  /* ---- breadcrumb ---- */
+  .crumb {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 26px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .crumb a {
+    color: var(--ink-mute);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .crumb a:hover { color: var(--ink); border-color: var(--rule-strong); }
+  .crumb .num { color: var(--accent); font-weight: 500; }
+  .crumb .sep { color: var(--rule-strong); }
+
+  /* ---- hero ---- */
+  .project-hero {
+    margin-bottom: 48px;
+  }
+  .project-hero h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(40px, 5.5vw, 58px);
+    line-height: 1.05;
+    letter-spacing: -0.022em;
+    margin: 0 0 18px;
+    color: var(--ink);
+    font-variation-settings: "opsz" 60;
+  }
+  .project-hero h1 .period { color: var(--accent); }
+  .project-hero .tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 50ch;
+    margin: 0 0 36px;
+    text-wrap: pretty;
+  }
+
+  /* ---- metadata strip ---- */
+  .meta-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 22px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .meta-strip .item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .meta-strip .k {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .meta-strip .v {
+    font-family: var(--serif);
+    font-size: 16px;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+
+  /* ---- stack list (technologies / skills) ---- */
+  .stack-list {
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .stack-item {
+    padding: 22px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border-top: 1px solid var(--rule);
+  }
+  .stack-item:first-child { border-top: none; }
+  .stack-item .head {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+  .stack-item .body {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 60ch;
+    text-wrap: pretty;
+  }
+
+  /* ---- feature blocks ---- */
+  .features {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 36px;
+  }
+  .feature {
+    padding: 32px 0;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  .feature:first-of-type { border-top: none; padding-top: 0; }
+  .feature .ix {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--ink-mute);
+    padding-top: 6px;
+  }
+  .feature .ix .slash { color: var(--rule-strong); margin: 0 2px; }
+  .feature h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+    color: var(--ink);
+  }
+  .feature h3 .em {
+    color: var(--accent);
+    font-style: italic;
+    font-weight: 400;
+  }
+  .feature p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+    text-wrap: pretty;
+    max-width: 60ch;
+  }
+
+  /* ---- KPI callouts ---- */
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .kpi {
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: var(--bg);
+    padding: 24px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .kpi .num {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(28px, 3.8vw, 40px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+    font-variation-settings: "opsz" 60;
+  }
+  .kpi .lbl {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+
+  /* ---- CTA row ---- */
+  .cta-row {
+    margin-top: 64px;
+    padding: 26px 30px;
+    background: var(--bg-sunk);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .cta-row .line {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--ink-soft);
+    text-wrap: pretty;
+  }
+  .cta-row a {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+    padding-bottom: 1px;
+    transition: gap 0.18s ease, border-color 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cta-row a:hover { border-color: var(--accent); gap: 10px; }
+
+  /* ---- Live dashboard embed ---- */
+  .dashboard-note {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0 0 28px;
+    max-width: 60ch;
+    text-wrap: pretty;
+  }
+  .dashboard-bleed {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 28px 16px;
+    background: var(--bg-sunk);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
+  }
+  .dashboard-frame {
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 12px;
+    box-shadow: 0 1px 0 var(--rule-strong);
+    width: 1024px;            /* desktop: fits the 1000px Tableau layout + padding */
+    max-width: 100%;          /* shrink on smaller viewports */
+    box-sizing: border-box;
+  }
+  .dashboard-caption {
+    margin-top: 14px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-align: center;
+  }
+
+  /* ---- View headers (between stacked dashboards) ---- */
+  .view-header {
+    margin: 12px 0 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .dashboard-bleed + .view-header { margin-top: 56px; }
+  .view-ix {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .view-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.22;
+    letter-spacing: -0.012em;
+    margin: 0 0 6px;
+    color: var(--ink);
+  }
+  .view-desc {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 60ch;
+  }
+
+  @media (max-width: 700px) {
+    .meta-strip { grid-template-columns: 1fr; gap: 14px; padding: 18px 0; }
+    .kpis { grid-template-columns: 1fr; }
+    .feature {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 28px 0;
+    }
+    .feature .ix { padding-top: 0; }
+    .stack-item { padding: 18px 22px; }
+    .cta-row { padding: 22px; }
+    .dashboard-bleed { padding: 18px 0; }
+    .dashboard-frame { padding: 8px; border-radius: 0; border-left: none; border-right: none; }
+  }
+</style>
+</head>
+<body>
+  <main class="page">
+
+    <div class="topnav">
+      <span class="brand"><span class="dot"></span>Julian Hernandez</span>
+      <nav aria-label="Primary">
+        <a href="Profile.html">Profile</a>
+        <a href="Projects.html" aria-current="page">Projects</a>
+        <a href="Contact.html">Contact</a>
+      </nav>
+    </div>
+
+    <div class="crumb">
+      <a href="Projects.html">Selected work</a>
+      <span class="sep" aria-hidden="true">/</span>
+      <span class="num">001</span>
+      <span>H1B Strategic Analysis</span>
+    </div>
+
+    <header class="project-hero">
+      <h1>H1B Strategic Analysis<span class="period">.</span></h1>
+      <p class="tagline">Navigating the U.S. tech landscape with FY2025 Q3 Labor Condition Application data. 83,000+ filings turned into a practical, two-tier dashboard for international candidates.</p>
+
+      <div class="meta-strip">
+        <div class="item">
+          <span class="k">Type</span>
+          <span class="v">Interactive BI dashboard</span>
+        </div>
+        <div class="item">
+          <span class="k">Tools</span>
+          <span class="v">Tableau · Tableau Prep</span>
+        </div>
+        <div class="item">
+          <span class="k">Source</span>
+          <span class="v">U.S. DOL, FY2025 Q3</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ LIVE DASHBOARD ============ -->
+    <section>
+      <div class="section-label"><span class="num">01</span><span>Live dashboard</span></div>
+      <h2 class="section-title">Try them live.</h2>
+
+      <!-- ===== View 01 — Summary ===== -->
+      <div class="view-header">
+        <span class="view-ix">View 01 / 02</span>
+        <h3 class="view-title">Summary</h3>
+        <p class="view-desc">High-level KPIs, geographic distribution of filings, and salary-by-state benchmarks for in-demand roles.</p>
+      </div>
+      <div class="dashboard-bleed">
+        <div class="dashboard-frame">
+          <!-- Tableau Public embed — Summary view (tabs off, single-view) -->
+          <div class='tableauPlaceholder' id='viz1779061733023' style='position: relative'>
+            <noscript>
+              <a href='#'><img alt=' ' src='https://public.tableau.com/static/images/H1/H1BAnalysis_17647233403640/Summary/1_rss.png' style='border: none' /></a>
+            </noscript>
+            <object class='tableauViz' style='display:none;'>
+              <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+              <param name='embed_code_version' value='3' />
+              <param name='site_root' value='' />
+              <param name='name' value='H1BAnalysis_17647233403640&#47;Summary' />
+              <param name='tabs' value='no' />
+              <param name='toolbar' value='yes' />
+              <param name='static_image' value='https://public.tableau.com/static/images/H1/H1BAnalysis_17647233403640/Summary/1.png' />
+              <param name='animate_transition' value='yes' />
+              <param name='display_static_image' value='yes' />
+              <param name='display_spinner' value='yes' />
+              <param name='display_overlay' value='yes' />
+              <param name='display_count' value='yes' />
+              <param name='language' value='en-US' />
+            </object>
+          </div>
+          <script type='text/javascript'>
+            (function () {
+              var divElement = document.getElementById('viz1779061733023');
+              var vizElement = divElement.getElementsByTagName('object')[0];
+              if (window.innerWidth >= 1024) {
+                vizElement.style.width = '1000px';
+                vizElement.style.height = '850px';
+              } else {
+                vizElement.style.width = '100%';
+                vizElement.style.height = '1400px';
+              }
+              var scriptElement = document.createElement('script');
+              scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+              vizElement.parentNode.insertBefore(scriptElement, vizElement);
+            })();
+          </script>
+        </div>
+      </div>
+
+      <!-- ===== View 02 — Career Strategy ===== -->
+      <div class="view-header">
+        <span class="view-ix">View 02 / 02</span>
+        <h3 class="view-title">Career Strategy</h3>
+        <p class="view-desc">Top sponsoring employers, role-by-state pay percentiles, and the corporate-sponsorship long tail.</p>
+      </div>
+      <div class="dashboard-bleed">
+        <div class="dashboard-frame">
+          <!-- Tableau Public embed — second view (shared link) -->
+          <div class='tableauPlaceholder' id='viz1779060633973' style='position: relative'>
+            <noscript>
+              <a href='#'><img alt=' ' src='https://public.tableau.com/static/images/3J/3JTGW6FN4/1_rss.png' style='border: none' /></a>
+            </noscript>
+            <object class='tableauViz' style='display:none;'>
+              <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+              <param name='embed_code_version' value='3' />
+              <param name='path' value='shared&#47;3JTGW6FN4' />
+              <param name='toolbar' value='yes' />
+              <param name='static_image' value='https://public.tableau.com/static/images/3J/3JTGW6FN4/1.png' />
+              <param name='animate_transition' value='yes' />
+              <param name='display_static_image' value='yes' />
+              <param name='display_spinner' value='yes' />
+              <param name='display_overlay' value='yes' />
+              <param name='display_count' value='yes' />
+              <param name='language' value='en-US' />
+            </object>
+          </div>
+          <script type='text/javascript'>
+            (function () {
+              var divElement = document.getElementById('viz1779060633973');
+              var vizElement = divElement.getElementsByTagName('object')[0];
+              if (window.innerWidth >= 1024) {
+                vizElement.style.width = '1000px';
+                vizElement.style.height = '850px';
+              } else {
+                vizElement.style.width = '100%';
+                vizElement.style.height = '1400px';
+              }
+              var scriptElement = document.createElement('script');
+              scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+              vizElement.parentNode.insertBefore(scriptElement, vizElement);
+            })();
+          </script>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ OVERVIEW ============ -->
+    <section>
+      <div class="section-label"><span class="num">02</span><span>Overview</span></div>
+      <h2 class="section-title">Government data, treated as a career asset.</h2>
+      <div class="prose">
+        <p>Most H-1B reporting stops at "here's the volume by company." This project starts there and keeps going, pairing application volume with location-aware salary distributions, top-employer breakdowns, and percentile wage data so candidates can answer the questions that actually matter: which states pay well <em>and</em> sponsor often, which employers are realistic at their level, and what salary they should ask for.</p>
+        <p>The result is a two-dashboard journey: <strong>Location Strategy</strong> for the macro view and <strong>Career Strategy</strong> for the micro, split deliberately so each screen answers one question well.</p>
+      </div>
+    </section>
+
+    <!-- ============ TECHNOLOGIES ============ -->
+    <section>
+      <div class="section-label"><span class="num">03</span><span>Technologies</span></div>
+      <h2 class="section-title">What it's built on.</h2>
+      <div class="stack-list">
+        <div class="stack-item">
+          <div class="head">Tableau Desktop</div>
+          <div class="body">Visual analytics, dashboard composition, and interactive parameter configuration, including dynamic "Top N" controls and cross-dashboard filter context.</div>
+        </div>
+        <div class="stack-item">
+          <div class="head">Tableau Prep Builder</div>
+          <div class="body">End-to-end ELT pipeline covering type coercion, casing normalisation, and resolution of missing geographical markers to produce a clean, visualisation-ready dataset.</div>
+        </div>
+        <div class="stack-item">
+          <div class="head">AI analytics assistants</div>
+          <div class="body">Gemini 3.0 and Claude used as thinking partners for workflow optimisation, analysis strategy, and pressure-testing dashboard structure.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CORE SKILLS ============ -->
+    <section>
+      <div class="section-label"><span class="num">04</span><span>Core skills</span></div>
+      <h2 class="section-title">What it demonstrates.</h2>
+      <div class="stack-list">
+        <div class="stack-item">
+          <div class="head">Data pipeline engineering</div>
+          <div class="body">Cleaned and transformed raw CSV data by standardising string casings, converting data types, and resolving missing geographical markers to produce a visualisation-ready dataset of 83,000+ records.</div>
+        </div>
+        <div class="stack-item">
+          <div class="head">Strategic dashboard UI/UX</div>
+          <div class="body">Employed a dual-dashboard strategy to prevent cognitive overload, splitting the user journey into a distinct "Location Strategy" view and a "Career Strategy" view.</div>
+        </div>
+        <div class="stack-item">
+          <div class="head">Dynamic data modelling</div>
+          <div class="body">Built user-controlled "Top N" parameters and context filters that let viewers seamlessly toggle between top companies and top roles without breaking background calculations.</div>
+        </div>
+        <div class="stack-item">
+          <div class="head">Actionable business intelligence</div>
+          <div class="body">Translated 83,000+ records into concrete, defensible recommendations for salary negotiation and targeted job hunting.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DEEP DIVE ============ -->
+    <section>
+      <div class="section-label"><span class="num">05</span><span>Deep dive · features &amp; insights</span></div>
+      <h2 class="section-title">Functional storytelling, four ways.</h2>
+
+      <div class="features">
+        <article class="feature">
+          <div class="ix">001<span class="slash">/</span>04</div>
+          <div>
+            <h3>The geographic landscape<span class="em">. Where to go.</span></h3>
+            <p>A spatial heatmap visualises the density of H-1B filings across the United States. Rather than tracking volume in isolation, the dashboard pairs each state with location-specific salary metrics, letting candidates balance job availability against cost of living and earning potential in the same view.</p>
+          </div>
+        </article>
+
+        <article class="feature">
+          <div class="ix">002<span class="slash">/</span>04</div>
+          <div>
+            <h3>The career navigator<span class="em">. Who to work for.</span></h3>
+            <p>Scatter plots and treemaps break down the reality of corporate sponsorship, including the long tail. Amazon may top the chart, but it represents only about 3% of total filings, which reframes the realistic field of targets well beyond the household-name employers.</p>
+          </div>
+        </article>
+
+        <article class="feature">
+          <div class="ix">003<span class="slash">/</span>04</div>
+          <div>
+            <h3>Data-driven negotiation<span class="em">. What to ask for.</span></h3>
+            <p>Averages mislead when it comes to pay. Box-and-whisker plots replace them with 25th to 75th percentile salary ranges for specific roles like Data Scientists and Software Developers across individual states, giving candidates a defensible anchor for offer conversations.</p>
+          </div>
+        </article>
+
+        <article class="feature">
+          <div class="ix">004<span class="slash">/</span>04</div>
+          <div>
+            <h3>Real-time market pulse<span class="em">. At a glance.</span></h3>
+            <p>Custom KPIs anchor the dashboard the moment it loads: 83,064 applications in the quarter, a 7-day median processing time, and a heavy 62.5% concentration in technical roles, so the user knows what they're walking into before drilling down.</p>
+          </div>
+        </article>
+      </div>
+
+    </section>
+
+    <div class="cta-row">
+      <span class="line">Here is the Tableau link.</span>
+      <a href="https://public.tableau.com/views/H1BAnalysis_17647233403640/Summary?:language=en-US&amp;:sid=&amp;:redirect=auth&amp;:display_count=n&amp;:origin=viz_share_link" target="_blank" rel="noopener">Open on Tableau Public <span aria-hidden="true">→</span></a>
+    </div>
+
+    <footer class="foot">
+      <span><a href="Projects.html" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--rule-strong);">← Back to projects</a></span>
+      <span>Julian Hernandez · Data Analyst</span>
+    </footer>
+
+  </main>
+</body>
+</html>
