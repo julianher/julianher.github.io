@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Julian Hernandez · AI Customer Support Ecosystem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  /* ---- breadcrumb ---- */
+  .crumb {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 26px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .crumb a {
+    color: var(--ink-mute);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .crumb a:hover { color: var(--ink); border-color: var(--rule-strong); }
+  .crumb .num { color: var(--accent); font-weight: 500; }
+  .crumb .sep { color: var(--rule-strong); }
+
+  /* ---- hero ---- */
+  .project-hero {
+    margin-bottom: 48px;
+  }
+  .project-hero h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(40px, 5.5vw, 58px);
+    line-height: 1.05;
+    letter-spacing: -0.022em;
+    margin: 0 0 18px;
+    color: var(--ink);
+    font-variation-settings: "opsz" 60;
+  }
+  .project-hero h1 .period { color: var(--accent); }
+  .project-hero .tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 50ch;
+    margin: 0 0 36px;
+    text-wrap: pretty;
+  }
+
+  /* ---- metadata strip ---- */
+  .meta-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 22px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .meta-strip .item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .meta-strip .k {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .meta-strip .v {
+    font-family: var(--serif);
+    font-size: 16px;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+
+  /* ---- stack list (technologies / skills) ---- */
+  .stack-list {
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .stack-item {
+    padding: 22px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border-top: 1px solid var(--rule);
+  }
+  .stack-item:first-child { border-top: none; }
+  .stack-item .head {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+  .stack-item .body {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 60ch;
+    text-wrap: pretty;
+  }
+
+  /* ---- feature blocks ---- */
+  .features {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 36px;
+  }
+  .feature {
+    padding: 32px 0;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  .feature:first-of-type { border-top: none; padding-top: 0; }
+  .feature .ix {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--ink-mute);
+    padding-top: 6px;
+  }
+  .feature .ix .slash { color: var(--rule-strong); margin: 0 2px; }
+  .feature h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+    color: var(--ink);
+  }
+  .feature h3 .em {
+    color: var(--accent);
+    font-style: italic;
+    font-weight: 400;
+  }
+  .feature p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+    text-wrap: pretty;
+    max-width: 60ch;
+  }
+
+  /* ---- CTA row ---- */
+  .cta-row {
+    margin-top: 64px;
+    padding: 26px 30px;
+    background: var(--bg-sunk);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .cta-row .line {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--ink-soft);
+    text-wrap: pretty;
+  }
+  .cta-row a {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+    padding-bottom: 1px;
+    transition: gap 0.18s ease, border-color 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cta-row a:hover { border-color: var(--accent); gap: 10px; }
+
+  /* ---- video embed ---- */
+  .video-note {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0 0 22px;
+    max-width: 60ch;
+    text-wrap: pretty;
+  }
+  .video-wrap {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 */
+    margin: 0 0 14px;
+    background: var(--bg-sunk);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .video-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .video-fallback {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+    padding-bottom: 1px;
+    transition: border-color 0.15s ease;
+  }
+  .video-fallback:hover { border-color: var(--accent); }
+
+  @media (max-width: 700px) {
+    .meta-strip { grid-template-columns: 1fr; gap: 14px; padding: 18px 0; }
+    .feature {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 28px 0;
+    }
+    .feature .ix { padding-top: 0; }
+    .stack-item { padding: 18px 22px; }
+    .cta-row { padding: 22px; }
+  }
+</style>
+</head>
+<body>
+  <main class="page">
+
+    <div class="topnav">
+      <span class="brand"><span class="dot"></span>Julian Hernandez</span>
+      <nav aria-label="Primary">
+        <a href="Profile.html">Profile</a>
+        <a href="Projects.html" aria-current="page">Projects</a>
+        <a href="Contact.html">Contact</a>
+      </nav>
+    </div>
+
+    <div class="crumb">
+      <a href="Projects.html">Selected work</a>
+      <span class="sep" aria-hidden="true">/</span>
+      <span class="num">002</span>
+      <span>AI Customer Support Ecosystem</span>
+    </div>
+
+    <header class="project-hero">
+      <h1>An AI Customer Support Ecosystem for Campus Parking<span class="period">.</span></h1>
+      <p class="tagline">A multi-modal AI assistant for Florida International University's parking and transportation services, combining a text-based chatbot and a voice agent to handle routine inquiries that would otherwise occupy human staff.</p>
+
+      <div class="meta-strip">
+        <div class="item">
+          <span class="k">Type</span>
+          <span class="v">Multi-modal AI assistant</span>
+        </div>
+        <div class="item">
+          <span class="k">Tools</span>
+          <span class="v">Expertise AI · ElevenLabs · Gemini</span>
+        </div>
+        <div class="item">
+          <span class="k">Context</span>
+          <span class="v">FIU Parking &amp; Transportation</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ WALKTHROUGH VIDEO ============ -->
+    <section>
+      <div class="section-label"><span class="num">01</span><span>Walkthrough</span></div>
+      <h2 class="section-title">See the assistants in action.</h2>
+      <p class="video-note">A short walkthrough of both interfaces: "Paws Support" handling typed inquiries and "Roary" handling spoken ones, all grounded in the same Q&amp;A knowledge base.</p>
+
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/y3eT0rDA4UU"
+          title="An AI Customer Support Ecosystem for Campus Parking"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+      </div>
+      <a class="video-fallback" href="https://youtu.be/y3eT0rDA4UU" target="_blank" rel="noopener">Watch on YouTube →</a>
+    </section>
+
+    <!-- ============ OVERVIEW ============ -->
+    <section>
+      <div class="section-label"><span class="num">02</span><span>Overview</span></div>
+      <h2 class="section-title">Routine inquiries, handled at scale.</h2>
+      <div class="prose">
+        <p>University parking and transportation offices field a high volume of repetitive questions like permit policies, visitor rules, citation appeals, and shuttle schedules. Most are answerable from publicly documented policies, but they consume staff time that could be spent on edge cases that actually require human judgment.</p>
+        <p>The response was to build two complementary AI interfaces over a single shared knowledge base. <strong>Paws Support</strong>, branded with FIU blue, handles typed inquiries through Expertise AI. <strong>Roary</strong>, modeled after FIU's panther mascot, handles spoken interactions through ElevenLabs with a deliberately calm and empathetic persona tuned for stressful topics like citations. The knowledge base itself was assembled by using Gemini Deep Research to gather public policy information, then structured into Q&amp;A format, a choice that avoided pulling directly from FIU's official site while still grounding the assistants in real institutional context.</p>
+      </div>
+    </section>
+
+    <!-- ============ TECHNOLOGIES ============ -->
+    <section>
+      <div class="section-label"><span class="num">03</span><span>Technologies</span></div>
+      <h2 class="section-title">What it's built on.</h2>
+      <div class="stack-list">
+        <div class="stack-item">
+          <div class="head">Expertise AI</div>
+          <div class="body">Hosts "Paws Support," the text chatbot, branded with FIU blue and tuned to handle typed inquiries through the shared Q&amp;A knowledge base.</div>
+        </div>
+        <div class="stack-item">
+          <div class="head">ElevenLabs</div>
+          <div class="body">Powers "Roary," the voice agent modeled after FIU's panther mascot, with a deliberately calm and empathetic persona tuned for stressful topics like citations.</div>
+        </div>
+        <div class="stack-item">
+          <div class="head">Google Gemini</div>
+          <div class="body">Used in Deep Research mode to gather public policy information, which was then structured into a Q&amp;A format ready to ground both assistants.</div>
+        </div>
+        <div class="stack-item">
+          <div class="head">Custom Q&amp;A knowledge base</div>
+          <div class="body">A parallel institutional context, generated from public sources via Gemini, used as the single shared ground truth for both the text and voice agents.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DESIGN CHOICES ============ -->
+    <section>
+      <div class="section-label"><span class="num">04</span><span>Design choices worth noting</span></div>
+      <h2 class="section-title">Three decisions that shaped the build.</h2>
+
+      <div class="features">
+        <article class="feature">
+          <div class="ix">001<span class="slash">/</span>03</div>
+          <div>
+            <h3>Two modalities, <span class="em">two personas.</span></h3>
+            <p>Voice and text interactions have different tonal expectations; trying to use one personality for both would degrade either. Roary's voice persona was tuned for emotional context that text doesn't require.</p>
+          </div>
+        </article>
+
+        <article class="feature">
+          <div class="ix">002<span class="slash">/</span>03</div>
+          <div>
+            <h3>Ethical data sourcing<span class="em">.</span></h3>
+            <p>Rather than scraping the official FIU site directly, I generated a parallel knowledge base from public sources via Gemini, simulating institutional documentation without overstepping.</p>
+          </div>
+        </article>
+
+        <article class="feature">
+          <div class="ix">003<span class="slash">/</span>03</div>
+          <div>
+            <h3>Realistic scope<span class="em">.</span></h3>
+            <p>The assistants are designed to handle the routine ~90% of inquiries cleanly and to acknowledge their limits on complex cases like appeals, payments, and anything requiring real judgment, where human agents remain essential.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="cta-row">
+      <span class="line">Want to see how it works?</span>
+      <a href="https://youtu.be/y3eT0rDA4UU" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">→</span></a>
+    </div>
+
+    <footer class="foot">
+      <span><a href="Projects.html" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--rule-strong);">← Back to projects</a></span>
+      <span>Julian Hernandez · Data Analyst</span>
+    </footer>
+
+  </main>
+</body>
+</html>
