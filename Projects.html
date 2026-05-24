@@ -141,6 +141,77 @@
   }
   .project-link:hover .arrow { transform: translateX(2px); }
 
+  /* ---- video embed ---- */
+  .video-wrap {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 */
+    margin: 0 0 14px;
+    background: var(--bg-sunk);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .video-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .video-fallback {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+    padding-bottom: 1px;
+    margin: 0 0 26px;
+    transition: border-color 0.15s ease;
+  }
+  .video-fallback:hover { border-color: var(--accent); }
+
+  /* ---- in-entry case study sub-sections ---- */
+  .case-study h4 {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 26px 0 10px;
+  }
+  .case-study p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+    max-width: 56ch;
+    text-wrap: pretty;
+  }
+  .case-study ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .case-study li {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    max-width: 56ch;
+    text-wrap: pretty;
+    padding-left: 14px;
+    border-left: 2px solid var(--rule);
+  }
+  .case-study li strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
   /* ---- outro ---- */
   .outro {
     margin-top: 80px;
@@ -196,7 +267,7 @@
     <header class="intro">
       <div class="eyebrow"><span class="num">02</span><span>Selected work</span></div>
       <h1>Three projects<span class="period">.</span></h1>
-      <p>A small, honest sample of recent work — a dashboard, an LLM demo, and a set of ML notebooks.</p>
+      <p>A small, honest sample of recent work: a Tableau dashboard, an AI support ecosystem, and a set of ML notebooks.</p>
     </header>
 
     <div class="projects">
@@ -218,20 +289,41 @@
         </div>
       </article>
 
-      <article class="project">
+      <article class="project case-study">
         <div class="project-index">002<span class="slash">/</span>03</div>
         <div class="project-body">
-          <h3>AI Chatbot Demo</h3>
-          <p class="subtitle">Conversational assistant, walked through on video.</p>
-          <p class="desc">
-            An end-to-end build of an LLM-powered chatbot, documented as a YouTube walkthrough. I wanted to show, concretely, how language models can sit alongside an analyst's workflow — drafting queries, summarizing tables, and surfacing follow-up questions worth asking.
-          </p>
+          <h3>An AI Customer Support Ecosystem for Campus Parking</h3>
+          <p class="subtitle">A multi-modal AI assistant for Florida International University's parking and transportation services, combining a text-based chatbot and a voice agent to handle routine inquiries that would otherwise occupy human staff.</p>
           <div class="tags">
-            <span class="tag">Python</span>
-            <span class="tag">LLM APIs</span>
-            <span class="tag">Video walkthrough</span>
+            <span class="tag">Expertise AI</span>
+            <span class="tag">ElevenLabs</span>
+            <span class="tag">Google Gemini</span>
+            <span class="tag">Custom knowledge base</span>
           </div>
-          <a class="project-link" href="#">View project <span class="arrow">→</span></a>
+
+          <div class="video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/y3eT0rDA4UU"
+              title="An AI Customer Support Ecosystem for Campus Parking"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+          </div>
+          <a class="video-fallback" href="https://youtu.be/y3eT0rDA4UU" target="_blank" rel="noopener">Watch on YouTube →</a>
+
+          <h4>The problem</h4>
+          <p>University parking and transportation offices field a high volume of repetitive questions like permit policies, visitor rules, citation appeals, and shuttle schedules. Most are answerable from publicly documented policies, but they consume staff time that could be spent on edge cases that actually require human judgment.</p>
+
+          <h4>The approach</h4>
+          <p>I built two complementary AI interfaces over a single shared knowledge base. The text chatbot ("Paws Support," branded with FIU blue) handles typed inquiries through Expertise AI. The voice agent ("Roary," modeled after FIU's panther mascot) handles spoken interactions through ElevenLabs, with a deliberately calm and empathetic persona tuned for stressful topics like citations. The knowledge base itself was assembled by using Gemini Deep Research to gather public policy information, then structured into Q&amp;A format, a choice that avoided pulling directly from FIU's official site while still grounding the assistants in real institutional context.</p>
+
+          <h4>Design choices worth noting</h4>
+          <ul>
+            <li><strong>Two modalities, two personas.</strong> Voice and text interactions have different tonal expectations; trying to use one personality for both would degrade either. Roary's voice persona was tuned for emotional context that text doesn't require.</li>
+            <li><strong>Ethical data sourcing.</strong> Rather than scraping the official FIU site directly, I generated a parallel knowledge base from public sources via Gemini, simulating institutional documentation without overstepping.</li>
+            <li><strong>Realistic scope.</strong> The assistants are designed to handle the routine ~90% of inquiries cleanly and to acknowledge their limits on complex cases like appeals, payments, and anything requiring real judgment, where human agents remain essential.</li>
+          </ul>
         </div>
       </article>
 
