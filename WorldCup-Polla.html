@@ -1,0 +1,1340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Julian Hernandez · World Cup Prediction Pool</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  /* ---- breadcrumb ---- */
+  .crumb {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 26px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .crumb a {
+    color: var(--ink-mute);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .crumb a:hover { color: var(--ink); border-color: var(--rule-strong); }
+  .crumb .num { color: var(--accent); font-weight: 500; }
+  .crumb .sep { color: var(--rule-strong); }
+
+  /* ---- hero ---- */
+  .project-hero { margin-bottom: 48px; }
+  .project-hero h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(40px, 5.5vw, 58px);
+    line-height: 1.05;
+    letter-spacing: -0.022em;
+    margin: 0 0 18px;
+    color: var(--ink);
+    font-variation-settings: "opsz" 60;
+  }
+  .project-hero h1 .period { color: var(--accent); }
+  .project-hero .tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 52ch;
+    margin: 0 0 36px;
+    text-wrap: pretty;
+  }
+
+  /* ---- metadata strip ---- */
+  .meta-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 22px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .meta-strip .item { display: flex; flex-direction: column; gap: 6px; }
+  .meta-strip .k {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .meta-strip .v {
+    font-family: var(--serif);
+    font-size: 16px;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+
+  /* ---- stack list ---- */
+  .stack-list {
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .stack-item {
+    padding: 22px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border-top: 1px solid var(--rule);
+  }
+  .stack-item:first-child { border-top: none; }
+  .stack-item .head {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+  .stack-item .body {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 62ch;
+    text-wrap: pretty;
+  }
+
+  /* ---- feature blocks ---- */
+  .features { display: flex; flex-direction: column; margin-bottom: 8px; }
+  .feature {
+    padding: 32px 0;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  .feature:first-of-type { border-top: none; padding-top: 0; }
+  .feature .ix {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--ink-mute);
+    padding-top: 6px;
+  }
+  .feature .ix .slash { color: var(--rule-strong); margin: 0 2px; }
+  .feature h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+    color: var(--ink);
+  }
+  .feature h3 .em { color: var(--accent); font-style: italic; font-weight: 400; }
+  .feature p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+    text-wrap: pretty;
+    max-width: 62ch;
+  }
+
+  /* ---- KPI callouts ---- */
+  .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .kpi {
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: var(--bg);
+    padding: 24px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .kpi .num {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(28px, 3.8vw, 40px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+    font-variation-settings: "opsz" 60;
+  }
+  .kpi .lbl {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+
+  /* ---- pipeline ---- */
+  .pipeline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 10px;
+    margin: 4px 0 8px;
+  }
+  .pstep {
+    flex: 1 1 150px;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: var(--bg);
+    padding: 16px 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+  }
+  .pstep .pn {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .pstep .pt {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+  .pstep .pd {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-mute);
+  }
+
+  /* ---- CTA row ---- */
+  .cta-row {
+    margin-top: 64px;
+    padding: 26px 30px;
+    background: var(--bg-sunk);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .cta-row .line {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--ink-soft);
+    text-wrap: pretty;
+  }
+  .cta-row a {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+    padding-bottom: 1px;
+    transition: gap 0.18s ease, border-color 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cta-row a:hover { border-color: var(--accent); gap: 10px; }
+
+  /* ==========================================================
+     INTERACTIVE ENGINE WIDGET
+     ========================================================== */
+  .engine-note {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0 0 28px;
+    max-width: 62ch;
+    text-wrap: pretty;
+  }
+  .engine-bleed {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 32px 16px;
+    background: var(--bg-sunk);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    justify-content: center;
+  }
+  .engine-frame {
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 24px;
+    box-shadow: 0 1px 0 var(--rule-strong);
+    width: 1000px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* preset chips */
+  .eng-presets-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin: 0 0 10px;
+  }
+  .eng-presets { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 22px; }
+  .chip {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.01em;
+    color: var(--ink-soft);
+    background: var(--bg-sunk);
+    border: 1px solid var(--rule-strong);
+    border-radius: 100px;
+    padding: 5px 13px;
+    cursor: pointer;
+    transition: all 0.14s ease;
+  }
+  .chip:hover { color: var(--ink); border-color: var(--accent); }
+  .chip.active {
+    color: var(--bg);
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .eng-main {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+
+  /* controls */
+  .ctrl-block { margin-bottom: 20px; }
+  .ctrl-block:last-child { margin-bottom: 0; }
+  .ctrl-head {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin: 0 0 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .ctrl-head .booksum { color: var(--accent); }
+  .slider-row { margin-bottom: 13px; }
+  .slider-row:last-child { margin-bottom: 0; }
+  .slider-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+  }
+  .slider-top .name {
+    font-size: 13px;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .slider-top .name .sw {
+    width: 9px; height: 9px; border-radius: 2px; display: inline-block;
+  }
+  .slider-top .val {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink);
+  }
+  .slider-top .val .dv { color: var(--ink-mute); }
+  input[type=range] {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 4px; border-radius: 4px;
+    background: var(--rule-strong);
+    outline: none; cursor: pointer; margin: 6px 0;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--accent); border: 2px solid var(--bg);
+    box-shadow: 0 0 0 1px var(--rule-strong);
+    cursor: pointer;
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--accent); border: 2px solid var(--bg);
+    box-shadow: 0 0 0 1px var(--rule-strong);
+    cursor: pointer;
+  }
+
+  /* segmented controls (O/U line, knockout, color mode) */
+  .seg { display: inline-flex; border: 1px solid var(--rule-strong); border-radius: 5px; overflow: hidden; }
+  .seg button {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.02em;
+    color: var(--ink-soft);
+    background: var(--bg);
+    border: none;
+    border-left: 1px solid var(--rule-strong);
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: all 0.12s ease;
+  }
+  .seg button:first-child { border-left: none; }
+  .seg button.on { background: var(--accent); color: var(--bg); }
+  .seg button:not(.on):hover { background: var(--bg-sunk); color: var(--ink); }
+
+  /* readout column */
+  .pick-banner {
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    background: var(--accent-soft);
+    padding: 18px 22px;
+    margin-bottom: 18px;
+  }
+  .pick-banner .pb-lbl {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--accent) 80%, var(--ink));
+    margin-bottom: 8px;
+  }
+  .pick-banner .pb-score {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(26px, 3.6vw, 34px);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .pick-banner .pb-score .vs { color: var(--accent); margin: 0 12px; }
+  .pick-banner .pb-meta {
+    margin-top: 8px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+  }
+  .pick-banner .pb-meta b { color: var(--ink); font-weight: 600; }
+
+  .readout-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .rstat {
+    border: 1px solid var(--rule);
+    border-radius: 5px;
+    padding: 12px 14px;
+    background: var(--bg);
+  }
+  .rstat .rk {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 5px;
+  }
+  .rstat .rv {
+    font-family: var(--mono);
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .rstat .rv small { color: var(--ink-mute); font-size: 12px; }
+
+  /* 1X2 comparison bars */
+  .bars-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin: 0 0 10px;
+  }
+  .barset { margin-bottom: 12px; }
+  .barset .bl {
+    font-size: 11.5px; color: var(--ink-mute); margin-bottom: 4px;
+    display: flex; justify-content: space-between;
+  }
+  .stackbar {
+    display: flex; height: 22px; border-radius: 4px; overflow: hidden;
+    border: 1px solid var(--rule);
+  }
+  .stackbar span {
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 10.5px; color: var(--bg);
+    overflow: hidden; white-space: nowrap;
+    transition: width 0.25s ease;
+  }
+  .legend-1x2 {
+    display: flex; gap: 16px; font-size: 11.5px; color: var(--ink-soft);
+    margin-top: 2px;
+  }
+  .legend-1x2 .li { display: flex; align-items: center; gap: 6px; }
+  .legend-1x2 .sw { width: 10px; height: 10px; border-radius: 2px; }
+
+  /* matrix */
+  .matrix-section { margin-top: 28px; padding-top: 26px; border-top: 1px solid var(--rule); }
+  .matrix-head {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    flex-wrap: wrap; gap: 14px; margin-bottom: 18px;
+  }
+  .matrix-head .mtitle {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 19px;
+    color: var(--ink);
+    margin: 0 0 4px;
+  }
+  .matrix-head .msub {
+    font-size: 13px; color: var(--ink-mute); margin: 0; max-width: 52ch;
+  }
+  .matrix-wrap {
+    display: grid;
+    grid-template-columns: 1fr 230px;
+    gap: 24px;
+    align-items: start;
+  }
+  .matrix-outer { min-width: 0; overflow-x: auto; }
+  .axis-top {
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 6px;
+    padding-left: 30px;
+  }
+  .matrix-flex { display: flex; align-items: stretch; }
+  .axis-left {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    padding: 22px 6px 0 0;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 22px repeat(7, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 3px;
+    flex: 1;
+    min-width: 380px;
+  }
+  .gh {
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-mute);
+    aspect-ratio: 1 / 1;
+  }
+  .cell {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-soft);
+    cursor: default;
+    border: 1.5px solid transparent;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .cell.optimal {
+    border-color: var(--ink);
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 3.5px var(--accent);
+    z-index: 2;
+    font-weight: 700;
+  }
+  .cell.modal::after {
+    content: "";
+    position: absolute;
+    top: 3px; right: 3px;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--ink);
+    opacity: 0.55;
+  }
+  .cell .tag {
+    position: absolute;
+    bottom: -7px; left: 50%; transform: translateX(-50%);
+    font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em;
+    background: var(--accent); color: var(--bg);
+    padding: 1px 5px; border-radius: 3px; text-transform: uppercase;
+    z-index: 3;
+  }
+
+  /* matrix side panel */
+  .mside { display: flex; flex-direction: column; gap: 18px; }
+  .legend-box {
+    border: 1px solid var(--rule); border-radius: 5px; padding: 14px;
+    background: var(--bg);
+  }
+  .legend-box .lh {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-mute); margin-bottom: 10px;
+  }
+  .scale-bar {
+    height: 10px; border-radius: 3px; margin-bottom: 4px;
+    background: linear-gradient(to right,
+      color-mix(in oklab, var(--accent) 6%, var(--bg-sunk)),
+      var(--accent));
+  }
+  .scale-ends {
+    display: flex; justify-content: space-between;
+    font-family: var(--mono); font-size: 10px; color: var(--ink-mute);
+    margin-bottom: 14px;
+  }
+  .legend-key { display: flex; flex-direction: column; gap: 9px; font-size: 12px; color: var(--ink-soft); }
+  .legend-key .lk { display: flex; align-items: center; gap: 9px; }
+  .lk .mk-opt {
+    width: 15px; height: 15px; border-radius: 3px; flex: none;
+    border: 1.5px solid var(--ink);
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--accent);
+    background: color-mix(in oklab, var(--accent) 40%, var(--bg));
+  }
+  .lk .mk-mod {
+    width: 15px; height: 15px; border-radius: 3px; flex: none;
+    background: color-mix(in oklab, var(--accent) 25%, var(--bg));
+    position: relative;
+  }
+  .lk .mk-mod::after {
+    content: ""; position: absolute; top: 2px; right: 2px;
+    width: 4px; height: 4px; border-radius: 50%; background: var(--ink); opacity: 0.55;
+  }
+
+  .alts {
+    border: 1px solid var(--rule); border-radius: 5px; overflow: hidden;
+    background: var(--bg);
+  }
+  .alts .ah {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-mute);
+    padding: 11px 13px 9px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .alt-row {
+    display: grid; grid-template-columns: auto 1fr auto;
+    gap: 10px; align-items: center;
+    padding: 9px 13px;
+    border-top: 1px solid var(--rule);
+    font-size: 12.5px;
+  }
+  .alt-row:first-of-type { border-top: none; }
+  .alt-row .as { font-family: var(--mono); color: var(--ink); }
+  .alt-row .ae { font-family: var(--mono); color: var(--accent); text-align: right; }
+  .alt-row .ax { font-family: var(--mono); color: var(--ink-mute); font-size: 11px; }
+  .alt-row.lead .as { font-weight: 700; }
+
+  .engine-foot {
+    margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--rule);
+    font-size: 12px; color: var(--ink-mute); line-height: 1.6;
+  }
+  .engine-foot b { color: var(--ink-soft); font-weight: 600; }
+
+  @media (max-width: 860px) {
+    .eng-main { grid-template-columns: 1fr; gap: 24px; }
+    .matrix-wrap { grid-template-columns: 1fr; }
+    .mside { flex-direction: column; }
+  }
+  @media (max-width: 700px) {
+    .meta-strip { grid-template-columns: 1fr; gap: 14px; padding: 18px 0; }
+    .kpis { grid-template-columns: 1fr; }
+    .feature { grid-template-columns: 1fr; gap: 8px; padding: 28px 0; }
+    .feature .ix { padding-top: 0; }
+    .stack-item { padding: 18px 22px; }
+    .cta-row { padding: 22px; }
+    .engine-bleed { padding: 20px 0; }
+    .engine-frame { padding: 16px; border-radius: 0; border-left: none; border-right: none; }
+    .readout-stats { grid-template-columns: 1fr 1fr; }
+    .grid { min-width: 300px; }
+    .cell { font-size: 9.5px; }
+  }
+</style>
+</head>
+<body>
+  <main class="page">
+
+    <div class="topnav">
+      <span class="brand"><span class="dot"></span>Julian Hernandez</span>
+      <nav aria-label="Primary">
+        <a href="Profile.html">Profile</a>
+        <a href="Projects.html" aria-current="page">Projects</a>
+        <a href="Contact.html">Contact</a>
+      </nav>
+    </div>
+
+    <div class="crumb">
+      <a href="Projects.html">Selected work</a>
+      <span class="sep" aria-hidden="true">/</span>
+      <span class="num">003</span>
+      <span>World Cup Prediction Pool</span>
+    </div>
+
+    <header class="project-hero">
+      <h1>World Cup Prediction Pool<span class="period">.</span></h1>
+      <p class="tagline">A decision-science logbook for the 2026 World Cup. It doesn't try to out-predict the betting market — it treats the market as the best estimator there is, then squeezes a real edge out of applying it <em>systematically</em> and optimising every pick for the pool's unusual scoring rule.</p>
+
+      <div class="meta-strip">
+        <div class="item">
+          <span class="k">Type</span>
+          <span class="v">Quantitative decision logbook</span>
+        </div>
+        <div class="item">
+          <span class="k">Stack</span>
+          <span class="v">Python · NumPy · SciPy</span>
+        </div>
+        <div class="item">
+          <span class="k">Signal source</span>
+          <span class="v">Polymarket implied odds</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ INTERACTIVE ENGINE ============ -->
+    <section>
+      <div class="section-label"><span class="num">01</span><span>Interactive model</span></div>
+      <h2 class="section-title">Drive the engine yourself.</h2>
+      <p class="engine-note">
+        This is the actual pipeline that picks every scoreline, re-implemented to run live in your browser.
+        Move the sliders to set a match's market probabilities — or load a real captured match — and watch
+        the model de-vig the odds, solve the two Poisson scoring rates, build the Dixon-Coles score matrix,
+        and choose the scoreline that <em>maximises expected points</em> under the pool's rule. The point-maximising
+        pick often isn't the single most likely score — and that gap is where the edge lives.
+      </p>
+
+      <div class="engine-bleed">
+        <div class="engine-frame">
+
+          <p class="eng-presets-label">Load a real captured match</p>
+          <div class="eng-presets" id="presets"></div>
+
+          <div class="eng-main">
+            <!-- CONTROLS -->
+            <div class="eng-controls">
+              <div class="ctrl-block">
+                <div class="ctrl-head">
+                  <span>Market 1X2 (as read off the board)</span>
+                  <span class="booksum" id="booksum">booksum 100%</span>
+                </div>
+                <div class="slider-row">
+                  <div class="slider-top">
+                    <span class="name"><span class="sw" style="background:var(--accent)"></span>Home win</span>
+                    <span class="val"><span id="vHome">69.0</span>% <span class="dv">→ <span id="dHome">—</span></span></span>
+                  </div>
+                  <input type="range" id="sHome" min="1" max="98" step="0.1" value="69" autocomplete="off">
+                </div>
+                <div class="slider-row">
+                  <div class="slider-top">
+                    <span class="name"><span class="sw" style="background:var(--rule-strong)"></span>Draw</span>
+                    <span class="val"><span id="vDraw">21.0</span>% <span class="dv">→ <span id="dDraw">—</span></span></span>
+                  </div>
+                  <input type="range" id="sDraw" min="1" max="98" step="0.1" value="21" autocomplete="off">
+                </div>
+                <div class="slider-row">
+                  <div class="slider-top">
+                    <span class="name"><span class="sw" style="background:var(--ink-mute)"></span>Away win</span>
+                    <span class="val"><span id="vAway">11.0</span>% <span class="dv">→ <span id="dAway">—</span></span></span>
+                  </div>
+                  <input type="range" id="sAway" min="1" max="98" step="0.1" value="11" autocomplete="off">
+                </div>
+              </div>
+
+              <div class="ctrl-block">
+                <div class="ctrl-head"><span>Over / Under line</span></div>
+                <div class="seg" id="lineSeg">
+                  <button data-line="1.5">1.5</button>
+                  <button data-line="2.5" class="on">2.5</button>
+                  <button data-line="3.5">3.5</button>
+                  <button data-line="4.5">4.5</button>
+                </div>
+                <div class="slider-row" style="margin-top:14px">
+                  <div class="slider-top">
+                    <span class="name">P(Over <span id="lineLbl">2.5</span>)</span>
+                    <span class="val"><span id="vOver">44.0</span>%</span>
+                  </div>
+                  <input type="range" id="sOver" min="1" max="99" step="0.1" value="44" autocomplete="off">
+                  <div class="slider-top" style="margin-top:2px">
+                    <span class="name" style="color:var(--ink-mute);font-size:11.5px">implied P(Under) <span id="underLbl">56.0</span>%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ctrl-block">
+                <div class="ctrl-head"><span>Match stage (scoring weight)</span></div>
+                <div class="seg" id="koSeg">
+                  <button data-ko="0" class="on">Group · 5/2/2/1</button>
+                  <button data-ko="1">Knockout · ×2</button>
+                </div>
+              </div>
+
+              <div class="ctrl-block">
+                <div class="ctrl-head"><span>Colour the matrix by</span></div>
+                <div class="seg" id="modeSeg">
+                  <button data-mode="prob" class="on">Probability</button>
+                  <button data-mode="ev">Expected pts</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- READOUT -->
+            <div class="eng-readout">
+              <div class="pick-banner">
+                <div class="pb-lbl">Model's optimal pick</div>
+                <div class="pb-score">
+                  <span id="pbHome">Mexico</span>
+                  <span class="vs"><span id="pbSH">1</span>–<span id="pbSA">0</span></span>
+                  <span id="pbAway">South Africa</span>
+                </div>
+                <div class="pb-meta">
+                  Expected points <b id="pbEv">5.40</b>
+                  · this exact score happens <b id="pbPx">15%</b> of the time
+                  · <span id="pbCustom">Mexico vs South Africa</span>
+                </div>
+              </div>
+
+              <div class="readout-stats">
+                <div class="rstat">
+                  <div class="rk">Home scoring rate λ</div>
+                  <div class="rv" id="rLamH">1.88</div>
+                </div>
+                <div class="rstat">
+                  <div class="rk">Away scoring rate λ</div>
+                  <div class="rv" id="rLamA">0.56</div>
+                </div>
+                <div class="rstat">
+                  <div class="rk">Most likely score</div>
+                  <div class="rv" id="rModal">1–0 <small id="rModalP">15%</small></div>
+                </div>
+                <div class="rstat">
+                  <div class="rk">Expected total goals</div>
+                  <div class="rv" id="rTot">2.44</div>
+                </div>
+              </div>
+
+              <div class="bars-label">Model reproduces the market 1X2</div>
+              <div class="barset">
+                <div class="bl"><span>Market (de-vigged)</span></div>
+                <div class="stackbar" id="barMarket"></div>
+              </div>
+              <div class="barset">
+                <div class="bl"><span>Model (from the score matrix)</span></div>
+                <div class="stackbar" id="barModel"></div>
+              </div>
+              <div class="legend-1x2">
+                <span class="li"><span class="sw" style="background:var(--accent)"></span>Home</span>
+                <span class="li"><span class="sw" style="background:var(--rule-strong)"></span>Draw</span>
+                <span class="li"><span class="sw" style="background:var(--ink-mute)"></span>Away</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- MATRIX -->
+          <div class="matrix-section">
+            <div class="matrix-head">
+              <div>
+                <p class="mtitle">The Dixon-Coles score matrix</p>
+                <p class="msub">Probability of every 90-minute scoreline. The outlined cell is the point-maximising pick; the dot marks the single most likely score.</p>
+              </div>
+            </div>
+            <div class="matrix-wrap">
+              <div class="matrix-outer">
+                <div class="axis-top">Away goals →</div>
+                <div class="matrix-flex">
+                  <div class="axis-left">Home goals →</div>
+                  <div class="grid" id="grid"></div>
+                </div>
+              </div>
+              <div class="mside">
+                <div class="legend-box">
+                  <div class="lh" id="scaleTitle">Cell shade = probability</div>
+                  <div class="scale-bar"></div>
+                  <div class="scale-ends"><span>low</span><span id="scaleHi">high</span></div>
+                  <div class="legend-key">
+                    <div class="lk"><span class="mk-opt"></span><span>Point-maximising pick</span></div>
+                    <div class="lk"><span class="mk-mod"></span><span>Most likely score</span></div>
+                  </div>
+                </div>
+                <div class="alts" id="alts"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="engine-foot" id="engFoot"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ OVERVIEW ============ -->
+    <section>
+      <div class="section-label"><span class="num">02</span><span>Overview</span></div>
+      <h2 class="section-title">An edge without a crystal ball.</h2>
+      <div class="prose">
+        <p>Coempopular runs a World Cup pool — a <strong>"polla"</strong> — with roughly <strong>650 participants</strong> and one quirky scoring rule. Most people fill it in on gut feel and loyalty. I treated it as a decision problem instead, and built a documented, reproducible process for all 104 matches.</p>
+        <p>The thesis is deliberately humble: I am <em>not</em> claiming to predict football better than the market. Sharp betting markets already price in injuries, form and lineups faster than any individual can. So I take the market's probabilities as given — the best estimator available — and ask a narrower question: <strong>how much edge comes purely from applying it consistently while rivals guess, and from optimising for this pool's specific scoring rule rather than for the most likely scoreline?</strong></p>
+        <p>Two structural facts make that edge real. First, <strong>there's no vig drag</strong> — the pool charges no per-pick commission, so a small informational edge that a bookmaker's margin would normally eat translates straight into points. Second, <strong>the scoring rule isn't what the market optimises for</strong>: the point-maximising scoreline is generally not the most probable one, which leaves room to optimise on top of the market. The project is judged on decision quality, not on whether it wins — variance dominates any single tournament.</p>
+      </div>
+    </section>
+
+    <!-- ============ METHOD ============ -->
+    <section>
+      <div class="section-label"><span class="num">03</span><span>Method</span></div>
+      <h2 class="section-title">From a price on a screen to a scoreline.</h2>
+      <p class="engine-note">Every pick runs through the same five steps. Nothing is improvised; the numbers live in version-controlled CSVs and the code only transforms them.</p>
+      <div class="pipeline">
+        <div class="pstep">
+          <span class="pn">01</span>
+          <span class="pt">Capture the odds</span>
+          <span class="pd">Polymarket 1X2 + over/under, read as implied probabilities and timestamped.</span>
+        </div>
+        <div class="pstep">
+          <span class="pn">02</span>
+          <span class="pt">De-vig (Shin)</span>
+          <span class="pd">Strip the bookmaker margin so the probabilities are fair and sum to 1.</span>
+        </div>
+        <div class="pstep">
+          <span class="pn">03</span>
+          <span class="pt">Solve Poisson λ</span>
+          <span class="pd">Fit the home &amp; away scoring rates that reproduce the 1X2 and the total.</span>
+        </div>
+        <div class="pstep">
+          <span class="pn">04</span>
+          <span class="pt">Dixon-Coles matrix</span>
+          <span class="pd">Build the full joint score distribution, corrected for low-scoring draws.</span>
+        </div>
+        <div class="pstep">
+          <span class="pn">05</span>
+          <span class="pt">Maximise E[points]</span>
+          <span class="pd">Pick the scoreline with the highest expected points under the pool rule.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TECHNOLOGIES ============ -->
+    <section>
+      <div class="section-label"><span class="num">04</span><span>What it's built on</span></div>
+      <h2 class="section-title">The machinery.</h2>
+      <div class="stack-list">
+        <div class="stack-item">
+          <div class="head">Shin de-vigging</div>
+          <div class="body">A 1992 method that models the overround as informed-money pressure and backs out fair probabilities — better-calibrated than naïve normalisation on higher-margin books, and it collapses to simple normalisation when the margin is near zero, so it's safe to apply everywhere.</div>
+        </div>
+        <div class="stack-item">
+          <div class="head">Poisson goal model + λ solver</div>
+          <div class="body">A small weighted least-squares fit recovers the two scoring rates (λ home, λ away) that make the model reproduce the market's 1X2 split and over/under total simultaneously — the 1X2 fixes who's favoured, the total fixes how many goals.</div>
+        </div>
+        <div class="stack-item">
+          <div class="head">Dixon-Coles correction</div>
+          <div class="body">Independent Poisson famously underweights 0-0 and 1-1. The Dixon-Coles low-score correction (ρ ≈ −0.10) lifts those cells back to realistic levels, which matters because draws are exactly where the scoring rule pays off in tight matches.</div>
+        </div>
+        <div class="stack-item">
+          <div class="head">Expected-points optimiser</div>
+          <div class="body">The pool scores 5/2/2/1 — result type, exact home goals, exact away goals, goal difference (doubled in knockouts). For each candidate scoreline the engine integrates points over the entire matrix and submits the argmax, not the mode.</div>
+        </div>
+        <div class="stack-item">
+          <div class="head">Git as a tamper-evident logbook</div>
+          <div class="body">Every capture is committed and tagged with a server-timestamped GitHub Release <em>before</em> kickoff. The commit history is the proof that each pick was made on prior information — which is what makes a claim about decision quality credible.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CORE SKILLS ============ -->
+    <section>
+      <div class="section-label"><span class="num">05</span><span>What it demonstrates</span></div>
+      <h2 class="section-title">Beyond the football.</h2>
+      <div class="stack-list">
+        <div class="stack-item">
+          <div class="head">Probabilistic modelling</div>
+          <div class="body">Translating market prices into a calibrated joint distribution over outcomes — de-vigging, Poisson/Dixon-Coles fitting, and inverse-problem solving for latent scoring rates.</div>
+        </div>
+        <div class="stack-item">
+          <div class="head">Optimisation under a custom objective</div>
+          <div class="body">Recognising that the right answer changes with the loss function: maximising expected points is a different problem from predicting the likeliest score, and solving the right one is where the value sits.</div>
+        </div>
+        <div class="stack-item">
+          <div class="head">Market microstructure literacy</div>
+          <div class="body">Reading prediction-market prices correctly — mid versus ask, the bid-ask spread on thin markets, when to renormalise and when not to — so the inputs are clean before any modelling begins.</div>
+        </div>
+        <div class="stack-item">
+          <div class="head">Reproducible, auditable process</div>
+          <div class="body">A fixed operating procedure, data separated from code, automated tests before every commit, and a tamper-evident timestamp trail. The deliverable is the documented decision process, win or lose.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DEEP DIVE ============ -->
+    <section>
+      <div class="section-label"><span class="num">06</span><span>Deep dive · the interesting bits</span></div>
+      <h2 class="section-title">Where the edge actually hides.</h2>
+      <div class="features">
+        <article class="feature">
+          <div class="ix">001<span class="slash">/</span>04</div>
+          <div>
+            <h3>The favourite's 1-0<span class="em">. Built for partial credit.</span></h3>
+            <p>Across most group games the optimiser lands on a tight favourite win — 1-0 or 2-1 — even when no single scoreline clears 16%. A modest lead like 1-0 cashes the 5-point result <em>and</em> stays close on goal difference and the exact-goal bonuses across many nearby outcomes, so it collects partial credit far more often than a flashier guess. In tighter matches it diverges from the single likeliest score entirely — try it in the engine above and watch the outlined pick drift off the darkest cell.</p>
+          </div>
+        </article>
+        <article class="feature">
+          <div class="ix">002<span class="slash">/</span>04</div>
+          <div>
+            <h3>When a draw becomes optimal<span class="em">. In genuinely even games.</span></h3>
+            <p>Drag the three 1X2 sliders close together and the optimiser abandons the 1-0 and picks the draw, 0-0 or 1-1. When neither side is favoured, a low-scoring draw becomes the most likely single outcome and the Dixon-Coles correction makes those draws likelier still — so it's the highest-expectation play. The model reasons its way there; I never hard-code a draw. This shows up most in knockout rounds, simply because qualified teams tend to be evenly matched — the stage toggle above just reflects that those points count double.</p>
+          </div>
+        </article>
+        <article class="feature">
+          <div class="ix">003<span class="slash">/</span>04</div>
+          <div>
+            <h3>Reading the price, not the button<span class="em">. Mid vs ask.</span></h3>
+            <p>Polymarket shows a bold headline probability (the mid) and a green buy button (the ask, inflated by the spread). The capture rule is strict: always record the headline, never the button — and champion odds to one decimal, because a 0.2% gap is what decides who you crown. Small discipline, but it's the difference between clean inputs and quietly biased ones.</p>
+          </div>
+        </article>
+        <article class="feature">
+          <div class="ix">004<span class="slash">/</span>04</div>
+          <div>
+            <h3>Two sources, one honest comparison<span class="em">. Measured after the fact.</span></h3>
+            <p>Only Polymarket feeds the submitted picks. A second book (Codere) is captured in parallel but never used live — purely so that, at the end, I can score three strategies against real results and answer empirically which source and which method would have placed best. The official source never changes mid-tournament; that's what keeps the comparison fair.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ LIVE RESULTS ============ -->
+    <section>
+      <div class="section-label"><span class="num">07</span><span>Live results</span></div>
+      <h2 class="section-title">How it's going.</h2>
+      <p class="engine-note">A running logbook, updated as matches are played. Standings move with registration and with every scored match — this is a snapshot, not a final result.</p>
+      <div class="kpis">
+        <div class="kpi">
+          <span class="num">91</span>
+          <span class="lbl">Current rank of ~657 players · top 14%</span>
+        </div>
+        <div class="kpi">
+          <span class="num">7</span>
+          <span class="lbl">Matches locked &amp; committed before kickoff</span>
+        </div>
+        <div class="kpi">
+          <span class="num">0–1</span>
+          <span class="lbl">Haiti–Scotland · exact scoreline nailed</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta-row">
+      <span class="line">The full engine, data and pre-kickoff commit trail live on GitHub.</span>
+      <a href="https://github.com/julianher/worldcup-2026-polla" target="_blank" rel="noopener">View the repository <span aria-hidden="true">→</span></a>
+    </div>
+
+    <footer class="foot">
+      <span><a href="Projects.html" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--rule-strong);">← Back to projects</a></span>
+      <span>Julian Hernandez · Data Analyst</span>
+    </footer>
+
+  </main>
+
+<script>
+/* =====================================================================
+   Dixon-Coles / Poisson engine — faithful JS port of src/polla_model.py.
+   Validated cell-for-cell against the SciPy implementation.
+   ===================================================================== */
+const FACT = [1,1,2,6,24,120,720,5040,40320,362880,3628800,39916800];
+const RHO = -0.10, NMAX = 10, SEARCH = 6;
+
+function poissonPmf(k, lam){ return Math.exp(-lam) * Math.pow(lam,k) / FACT[k]; }
+function dcTau(i,j,lh,la){
+  if(i===0&&j===0) return 1 - lh*la*RHO;
+  if(i===0&&j===1) return 1 + lh*RHO;
+  if(i===1&&j===0) return 1 + la*RHO;
+  if(i===1&&j===1) return 1 - RHO;
+  return 1;
+}
+function scoreMatrix(lh,la){
+  const n=NMAX+1, M=[], ph=[], pa=[]; let s=0;
+  for(let k=0;k<n;k++){ ph.push(poissonPmf(k,lh)); pa.push(poissonPmf(k,la)); }
+  for(let i=0;i<n;i++){ M.push([]); for(let j=0;j<n;j++){ const v=dcTau(i,j,lh,la)*ph[i]*pa[j]; M[i][j]=v; s+=v; } }
+  for(let i=0;i<n;i++) for(let j=0;j<n;j++) M[i][j]/=s;
+  return M;
+}
+function outcomeProbs(M){
+  const n=M.length; let h=0,d=0,a=0;
+  for(let i=0;i<n;i++) for(let j=0;j<n;j++){ if(i>j)h+=M[i][j]; else if(i===j)d+=M[i][j]; else a+=M[i][j]; }
+  return [h,d,a];
+}
+function probOver(M,line){
+  const n=M.length; let o=0;
+  for(let i=0;i<n;i++) for(let j=0;j<n;j++) if(i+j>line) o+=M[i][j];
+  return o;
+}
+function devigShin(raw){
+  const B=raw.reduce((x,y)=>x+y,0);
+  if(B<=1+1e-9) return raw.map(x=>x/B);
+  const shin=(z)=>raw.map(pi=>(Math.sqrt(z*z+4*(1-z)*pi*pi/B)-z)/(2*(1-z)));
+  const con=(z)=>shin(z).reduce((x,y)=>x+y,0)-1;
+  let lo=1e-9, hi=1-1e-9;
+  if(con(lo)*con(hi)>0) return raw.map(x=>x/B);
+  for(let it=0; it<200; it++){
+    const mid=(lo+hi)/2, c=con(mid);
+    if(Math.abs(c)<1e-13) break;
+    if(con(lo)*c<0) hi=mid; else lo=mid;
+  }
+  const z=(lo+hi)/2, p=shin(z), ps=p.reduce((x,y)=>x+y,0);
+  return p.map(x=>x/ps);
+}
+function solveLambdas(tph,tpd,tpa,ouLine,pOver){
+  const obj=(lh,la)=>{
+    if(lh<=0||la<=0) return 1e6;
+    const M=scoreMatrix(lh,la), [h,d,a]=outcomeProbs(M);
+    let e=(h-tph)**2+(d-tpd)**2+(a-tpa)**2;
+    if(ouLine!=null&&pOver!=null) e+=(probOver(M,ouLine)-pOver)**2;
+    return e;
+  };
+  let bh=1.3, ba=1.3, be=Infinity;
+  for(let lh=0.1; lh<=4.0+1e-9; lh+=0.1)
+    for(let la=0.1; la<=4.0+1e-9; la+=0.1){ const e=obj(lh,la); if(e<be){be=e;bh=lh;ba=la;} }
+  for(const [step,span] of [[0.02,0.1],[0.005,0.02]]){
+    const l0=Math.max(0.05,bh-span), a0=Math.max(0.05,ba-span);
+    for(let lh=l0; lh<=bh+span+1e-9; lh+=step)
+      for(let la=a0; la<=ba+span+1e-9; la+=step){ const e=obj(lh,la); if(e<be){be=e;bh=lh;ba=la;} }
+  }
+  return [bh,ba];
+}
+function scorePoints(ph,pa,ah,aa,ko){
+  const mult=ko?2:1; let pts=0;
+  const sp=Math.sign(ph-pa), sa=Math.sign(ah-aa);
+  if(sp===sa) pts+=5;
+  if(ph===ah) pts+=2;
+  if(pa===aa) pts+=2;
+  if((ph-pa)===(ah-aa)) pts+=1;
+  return pts*mult;
+}
+function expectedPoints(ph,pa,M,ko){
+  const n=M.length; let e=0;
+  for(let i=0;i<n;i++) for(let j=0;j<n;j++) e+=M[i][j]*scorePoints(ph,pa,i,j,ko);
+  return e;
+}
+
+/* ---- real captured matches (from data/match_odds_polymarket.csv) ---- */
+const PRESETS = [
+  {name:"Mexico vs South Africa", h:"Mexico", a:"South Africa", ph:69, pd:21, pa:11, line:2.5, over:44},
+  {name:"Korea vs Czechia", h:"Korea Republic", a:"Czechia", ph:37, pd:32, pa:34, line:2.5, over:42},
+  {name:"USA vs Paraguay", h:"USA", a:"Paraguay", ph:49, pd:28, pa:23, line:2.5, over:42},
+  {name:"Qatar vs Switzerland", h:"Qatar", a:"Switzerland", ph:6.5, pd:14, pa:81, line:2.5, over:61},
+  {name:"Germany vs Curaçao", h:"Germany", a:"Curaçao", ph:93.7, pd:4.3, pa:2.5, line:4.5, over:46},
+  {name:"Haiti vs Scotland", h:"Haiti", a:"Scotland", ph:17, pd:23, pa:63, line:2.5, over:55},
+  {name:"Ivory Coast vs Ecuador", h:"Ivory Coast", a:"Ecuador", ph:27, pd:34, pa:41, line:1.5, over:60},
+];
+
+/* ---- state ---- */
+const state = {
+  ph:69, pd:21, pa:11, line:2.5, over:44, ko:false, mode:"prob",
+  homeTeam:"Mexico", awayTeam:"South Africa", presetName:"Mexico vs South Africa",
+};
+
+const $ = id => document.getElementById(id);
+const HOME_C="var(--accent)", DRAW_C="var(--rule-strong)", AWAY_C="var(--ink-mute)";
+
+/* build preset chips */
+const presetWrap = $("presets");
+const chipEls=[];
+PRESETS.forEach((p,idx)=>{
+  const b=document.createElement("button");
+  b.className="chip";
+  b.textContent=p.name;
+  b.onclick=()=>loadPreset(p,b);
+  presetWrap.appendChild(b);
+  chipEls.push(b);
+});
+function loadPreset(p,btn){
+  document.querySelectorAll("#presets .chip").forEach(c=>c.classList.remove("active"));
+  btn.classList.add("active");
+  state.ph=p.ph; state.pd=p.pd; state.pa=p.pa; state.line=p.line; state.over=p.over;
+  state.homeTeam=p.h; state.awayTeam=p.a; state.presetName=p.name;
+  $("sHome").value=p.ph; $("sDraw").value=p.pd; $("sAway").value=p.pa; $("sOver").value=p.over;
+  document.querySelectorAll("#lineSeg button").forEach(x=>x.classList.toggle("on", +x.dataset.line===p.line));
+  $("lineLbl").textContent=p.line;
+  recompute();
+}
+function markCustom(){
+  document.querySelectorAll("#presets .chip").forEach(c=>c.classList.remove("active"));
+  state.homeTeam="Home"; state.awayTeam="Away"; state.presetName="Custom inputs";
+}
+
+/* wire sliders */
+["sHome","sDraw","sAway","sOver"].forEach(id=>{
+  $(id).addEventListener("input",()=>{
+    state.ph=+$("sHome").value; state.pd=+$("sDraw").value;
+    state.pa=+$("sAway").value; state.over=+$("sOver").value;
+    markCustom(); recompute();
+  });
+});
+$("lineSeg").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  document.querySelectorAll("#lineSeg button").forEach(x=>x.classList.remove("on"));
+  b.classList.add("on"); state.line=+b.dataset.line; $("lineLbl").textContent=state.line;
+  recompute();
+});
+$("koSeg").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  document.querySelectorAll("#koSeg button").forEach(x=>x.classList.remove("on"));
+  b.classList.add("on"); state.ko=b.dataset.ko==="1"; recompute();
+});
+$("modeSeg").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  document.querySelectorAll("#modeSeg button").forEach(x=>x.classList.remove("on"));
+  b.classList.add("on"); state.mode=b.dataset.mode; recompute();
+});
+
+/* cell text colour against a terracotta fill of intensity t (0..1) */
+function cellText(t){ return t>0.58 ? "var(--bg)" : "var(--ink-soft)"; }
+function fill(t){
+  const pct=(6+t*94).toFixed(1); // 6%..100% accent over sunk bg
+  return `color-mix(in oklab, var(--accent) ${pct}%, var(--bg-sunk))`;
+}
+
+let raf=null;
+function recompute(){
+  if(raf) cancelAnimationFrame(raf);
+  raf=requestAnimationFrame(doCompute);
+}
+
+function doCompute(){
+  // de-vig 1X2
+  const [ph,pd,pa]=devigShin([state.ph/100, state.pd/100, state.pa/100]);
+  const booksum=state.ph+state.pd+state.pa;
+  const pOver=devigShin([state.over/100,(100-state.over)/100])[0];
+
+  // solve + matrix
+  const [lh,la]=solveLambdas(ph,pd,pa,state.line,pOver);
+  const M=scoreMatrix(lh,la);
+  const [mh,md,ma]=outcomeProbs(M);
+
+  // candidate scorelines 0..SEARCH
+  const cand=[];
+  for(let i=0;i<=SEARCH;i++) for(let j=0;j<=SEARCH;j++)
+    cand.push({i,j,ev:expectedPoints(i,j,M,state.ko),px:M[i][j]});
+  const byEv=[...cand].sort((a,b)=>b.ev-a.ev);
+  const best=byEv[0];
+  // most likely score (over full search range)
+  let modal=cand[0]; for(const c of cand) if(c.px>modal.px) modal=c;
+
+  // expected total goals
+  let eTot=0; for(let i=0;i<M.length;i++) for(let j=0;j<M.length;j++) eTot+=(i+j)*M[i][j];
+
+  /* ---- update control readouts ---- */
+  $("vHome").textContent=state.ph.toFixed(1);
+  $("vDraw").textContent=state.pd.toFixed(1);
+  $("vAway").textContent=state.pa.toFixed(1);
+  $("vOver").textContent=state.over.toFixed(1);
+  $("underLbl").textContent=(100-state.over).toFixed(1);
+  $("dHome").textContent=(ph*100).toFixed(0)+"%";
+  $("dDraw").textContent=(pd*100).toFixed(0)+"%";
+  $("dAway").textContent=(pa*100).toFixed(0)+"%";
+  $("booksum").textContent="booksum "+booksum.toFixed(1)+"%";
+
+  /* ---- pick banner ---- */
+  $("pbHome").textContent=state.homeTeam;
+  $("pbAway").textContent=state.awayTeam;
+  $("pbSH").textContent=best.i;
+  $("pbSA").textContent=best.j;
+  $("pbEv").textContent=best.ev.toFixed(2);
+  $("pbPx").textContent=(best.px*100).toFixed(0)+"%";
+  $("pbCustom").textContent=state.presetName;
+
+  /* ---- stats ---- */
+  $("rLamH").textContent=lh.toFixed(2);
+  $("rLamA").textContent=la.toFixed(2);
+  $("rModal").innerHTML=`${modal.i}–${modal.j} <small>${(modal.px*100).toFixed(0)}%</small>`;
+  $("rTot").textContent=eTot.toFixed(2);
+
+  /* ---- 1X2 comparison bars ---- */
+  const bar=(el,h,d,a)=>{
+    el.innerHTML="";
+    [[h,HOME_C],[d,DRAW_C],[a,AWAY_C]].forEach(([v,c])=>{
+      const s=document.createElement("span");
+      s.style.width=(v*100)+"%"; s.style.background=c;
+      s.textContent=(v*100>=9)?Math.round(v*100)+"%":"";
+      if(c===DRAW_C) s.style.color="var(--ink-soft)";
+      el.appendChild(s);
+    });
+  };
+  bar($("barMarket"),ph,pd,pa);
+  bar($("barModel"),mh,md,ma);
+
+  /* ---- matrix ---- */
+  const useEv = state.mode==="ev";
+  let maxP=0; for(const c of cand) if(c.px>maxP) maxP=c.px;
+  let minEv=Infinity,maxEv=-Infinity;
+  for(const c of cand){ if(c.ev<minEv)minEv=c.ev; if(c.ev>maxEv)maxEv=c.ev; }
+  $("scaleTitle").textContent = useEv ? "Cell shade = expected points" : "Cell shade = probability";
+  $("scaleHi").textContent = useEv ? maxEv.toFixed(1)+" pts" : (maxP*100).toFixed(0)+"%";
+
+  const grid=$("grid");
+  grid.innerHTML="";
+  // top-left corner + away-goal header
+  const corner=document.createElement("div"); corner.className="gh"; corner.textContent=""; grid.appendChild(corner);
+  for(let j=0;j<=SEARCH;j++){ const h=document.createElement("div"); h.className="gh"; h.textContent=j; grid.appendChild(h); }
+  for(let i=0;i<=SEARCH;i++){
+    const rowh=document.createElement("div"); rowh.className="gh"; rowh.textContent=i; grid.appendChild(rowh);
+    for(let j=0;j<=SEARCH;j++){
+      const c=cand.find(x=>x.i===i&&x.j===j);
+      const t = useEv ? (maxEv>minEv ? (c.ev-minEv)/(maxEv-minEv) : 0) : (maxP>0 ? c.px/maxP : 0);
+      const cell=document.createElement("div");
+      cell.className="cell";
+      cell.style.background=fill(t);
+      cell.style.color=cellText(t);
+      cell.textContent = useEv ? c.ev.toFixed(1) : (c.px*100>=0.5?Math.round(c.px*100):"");
+      cell.title=`${i}–${j}  ·  P=${(c.px*100).toFixed(1)}%  ·  E=${c.ev.toFixed(2)} pts`;
+      if(i===best.i&&j===best.j){ cell.classList.add("optimal"); const tag=document.createElement("span"); tag.className="tag"; tag.textContent="pick"; cell.appendChild(tag); }
+      if(i===modal.i&&j===modal.j) cell.classList.add("modal");
+      grid.appendChild(cell);
+    }
+  }
+
+  /* ---- alternatives ---- */
+  const altWrap=$("alts");
+  altWrap.innerHTML='<div class="ah">Top scorelines by expected points</div>';
+  byEv.slice(0,5).forEach((c,k)=>{
+    const r=document.createElement("div");
+    r.className="alt-row"+(k===0?" lead":"");
+    r.innerHTML=`<span class="as">${c.i}–${c.j}</span><span class="ax">P ${(c.px*100).toFixed(0)}%</span><span class="ae">${c.ev.toFixed(2)} E</span>`;
+    altWrap.appendChild(r);
+  });
+
+  /* ---- footnote ---- */
+  const ruleTxt = state.ko ? "10 / 4 / 4 / 2 (knockout, doubled)" : "5 / 2 / 2 / 1 (group)";
+  $("engFoot").innerHTML =
+    `<b>Reading it:</b> the model fits λ<sub>home</sub>=${lh.toFixed(2)} and λ<sub>away</sub>=${la.toFixed(2)} so its 1X2 ` +
+    `(${(mh*100).toFixed(0)}/${(md*100).toFixed(0)}/${(ma*100).toFixed(0)}) matches the de-vigged market ` +
+    `(${(ph*100).toFixed(0)}/${(pd*100).toFixed(0)}/${(pa*100).toFixed(0)}). ` +
+    `Scoring is ${ruleTxt} on result type / exact home goals / exact away goals / goal difference. ` +
+    `The pick <b>${best.i}–${best.j}</b> maximises expected points` +
+    (best.i===modal.i&&best.j===modal.j ? " — here it also happens to be the single most likely score."
+      : `, even though <b>${modal.i}–${modal.j}</b> is the most likely single score. That divergence is the edge.`);
+}
+
+// deterministic init — load the first preset so a browser form-restore can't desync the sliders
+loadPreset(PRESETS[0], chipEls[0]);
+</script>
+</body>
+</html>
