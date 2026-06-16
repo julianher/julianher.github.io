@@ -308,6 +308,52 @@
     flex: none;
   }
 
+  /* ---- scoring-rule table ---- */
+  .score-rule {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 28px 0 6px;
+  }
+  .score-rule table { width: 100%; border-collapse: collapse; }
+  .score-rule th, .score-rule td {
+    text-align: left;
+    padding: 13px 20px;
+    border-top: 1px solid var(--rule);
+  }
+  .score-rule thead th {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 400;
+    border-top: none;
+    background: var(--bg-sunk);
+  }
+  .score-rule thead th.pts-h { text-align: right; }
+  .score-rule tbody td {
+    font-size: 15.5px;
+    color: var(--ink-soft);
+  }
+  .score-rule td.pts {
+    text-align: right;
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 21px;
+    color: var(--accent);
+    width: 74px;
+    white-space: nowrap;
+    font-variation-settings: "opsz" 40;
+  }
+  .score-rule tfoot td {
+    border-top: 1px solid var(--rule-strong);
+    background: var(--bg-sunk);
+    color: var(--ink);
+    font-weight: 500;
+    font-size: 15.5px;
+  }
+
   /* ==========================================================
      INTERACTIVE ENGINE WIDGET
      ========================================================== */
@@ -773,9 +819,21 @@
       <div class="section-label"><span class="num">01</span><span>The idea</span></div>
       <h2 class="section-title">An edge without a crystal ball.</h2>
       <div class="prose">
-        <p>Coempopular runs a World Cup pool for its members, with <strong>~650 players</strong> predicting the exact scoreline of all <strong>104 matches</strong>. Most people pick with their heart.</p>
-        <p>The betting market is the opposite of a guess. It is about as efficient as information ever gets, because the best models, hardware and money on the planet are already spent keeping its odds accurate. Re-predicting football myself would just rebuild that, worse. So I don't compete with the market. I take its probabilities as given and translate them into the only currency this pool pays out in: <strong>points</strong>.</p>
-        <p>The pool scores <strong>5 / 2 / 2 / 1</strong> (result, exact home goals, exact away goals, goal difference), and the most likely scoreline is usually not the one that scores best on average. So for every candidate scoreline I compute its <strong>expected points</strong> against the market's probability of each result, and submit the maximum.</p>
+        <p>Every four years, companies across Colombia run an office World Cup pool, a <em>polla</em>: HR collects everyone's scoreline predictions and hands prizes to the top guesses.</p>
+        <p>My idea is to not really guess. The betting market already holds the best estimate of every result's probability, built by people with far better algorithms, computing and expertise than I could bring, so I borrow it instead of competing with it. I read only its two deepest, most-traded markets, <strong>who wins</strong> and <strong>how many goals</strong>, where the volume is heavy enough to trust the prices, and turn them into the exact score that wins the most points under the polla's classic <strong>5 / 2 / 2 / 1</strong> scoring, which is rarely the most likely score.</p>
+      </div>
+
+      <div class="score-rule">
+        <table>
+          <thead><tr><th>What your predicted scoreline gets right</th><th class="pts-h">Points</th></tr></thead>
+          <tbody>
+            <tr><td>The result (home win, draw or away win)</td><td class="pts">5</td></tr>
+            <tr><td>Exact number of home goals</td><td class="pts">2</td></tr>
+            <tr><td>Exact number of away goals</td><td class="pts">2</td></tr>
+            <tr><td>The goal difference</td><td class="pts">1</td></tr>
+          </tbody>
+          <tfoot><tr><td>A perfect scoreline lands all four at once</td><td class="pts">10</td></tr></tfoot>
+        </table>
       </div>
 
       <div class="formula" aria-label="Expected points, maximised">
@@ -806,11 +864,8 @@
       <div class="section-label"><span class="num">02</span><span>Interactive model</span></div>
       <h2 class="section-title">Now drive it yourself.</h2>
       <p class="engine-note">
-        Here is that whole idea turned into a working machine, rebuilt to run live in your browser.
-        Set a match's market odds with the sliders, or load one of the real matches I have already locked in,
-        and watch the model strip the bookmaker margin, solve the two scoring rates hidden inside the odds,
-        build the full grid of possible scorelines, and land on the one that <em>maximises expected points</em>.
-        Keep an eye on how often the pick it chooses is not the most likely score. That is the idea, made tangible.
+        An interactive example of how it works. Set a match's market odds with the sliders, or load a real one,
+        and watch the model turn them into the scoreline that <em>maximises points</em>. Try it yourself.
       </p>
 
       <div class="engine-bleed">
