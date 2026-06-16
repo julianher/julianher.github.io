@@ -253,6 +253,61 @@
   }
   .cta-row a:hover { border-color: var(--accent); gap: 10px; }
 
+  /* ---- expected-value formula ---- */
+  .formula {
+    margin: 30px 0 6px;
+    padding: 26px 22px 22px;
+    background: var(--bg-sunk);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow-x: auto;
+  }
+  .formula .expr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--serif);
+    font-size: clamp(17px, 2.4vw, 23px);
+    color: var(--ink);
+    white-space: nowrap;
+    line-height: 1.2;
+  }
+  .formula .expr.second { margin-top: 16px; }
+  .formula .op { color: var(--accent); }
+  .formula .stack {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+  }
+  .formula .stack .big { font-size: 1.45em; line-height: 0.85; }
+  .formula .stack .sub {
+    font-size: 0.5em;
+    color: var(--ink-mute);
+    font-style: italic;
+    margin-top: 3px;
+  }
+  .formula-key {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  .formula-key .row { display: flex; gap: 12px; }
+  .formula-key .sym {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ink);
+    min-width: 92px;
+    flex: none;
+  }
+
   /* ==========================================================
      INTERACTIVE ENGINE WIDGET
      ========================================================== */
@@ -718,9 +773,31 @@
       <div class="section-label"><span class="num">01</span><span>The idea</span></div>
       <h2 class="section-title">An edge without a crystal ball.</h2>
       <div class="prose">
-        <p>Every four years, the Coempopular credit union runs an office World Cup pool. Around <strong>650 people</strong> pay in, try to predict the exact scoreline of all <strong>104 matches</strong>, and chase a prize that mostly comes down to who guessed luckiest. Most players fill it in the obvious way: with their heart, their habits, and a soft spot for the teams they love.</p>
-        <p>I wanted to know whether you could treat it as a decision problem instead. Not by predicting football better than everyone else, because that part is a trap. Modern betting markets already fold in injuries, form and team news faster and more accurately than any one person ever could. So I took the opposite stance. I assume the market is right, and ask a smaller, answerable question: how much of an edge comes purely from applying that market view <strong>consistently, across every single match</strong>, while most rivals are guessing, and from tailoring each pick to this pool's unusual scoring rule rather than to the likeliest result?</p>
-        <p>Two things make that edge real, even with no secret information. There is no house cut, so the small advantage a bookmaker would normally swallow lands straight in your points total. And the scoring rule rewards something the market never optimises for: it pays 5 points for the right result, 2 each for the exact home and away goals, and 1 for the goal difference, so the scoreline that earns the most points on average is usually <em>not</em> the single most probable score. That gap, between what is likely and what is profitable, is the whole game. The project is judged on the quality of that process, not on whether it wins, because in a single tournament luck still rules.</p>
+        <p>Coempopular runs a World Cup pool for its members, with <strong>~650 players</strong> predicting the exact scoreline of all <strong>104 matches</strong>. Most people pick with their heart.</p>
+        <p>The betting market is the opposite of a guess. It is about as efficient as information ever gets, because the best models, hardware and money on the planet are already spent keeping its odds accurate. Re-predicting football myself would just rebuild that, worse. So I don't compete with the market. I take its probabilities as given and translate them into the only currency this pool pays out in: <strong>points</strong>.</p>
+        <p>The pool scores <strong>5 / 2 / 2 / 1</strong> (result, exact home goals, exact away goals, goal difference), and the most likely scoreline is usually not the one that scores best on average. So for every candidate scoreline I compute its <strong>expected points</strong> against the market's probability of each result, and submit the maximum.</p>
+      </div>
+
+      <div class="formula" aria-label="Expected points, maximised">
+        <div class="expr">
+          <span>E[&thinsp;pts(<i>s</i>)&thinsp;]</span>
+          <span class="op">=</span>
+          <span class="stack"><span class="big op">&Sigma;</span><span class="sub">i, j</span></span>
+          <span><i>P</i>(<i>i</i>,&thinsp;<i>j</i>)</span>
+          <span class="op">&middot;</span>
+          <span>pts(<i>s</i>,&thinsp;<i>i</i>,&thinsp;<i>j</i>)</span>
+        </div>
+        <div class="expr second">
+          <span>submit&nbsp;&nbsp;<i>s</i>&#42;</span>
+          <span class="op">=</span>
+          <span class="stack"><span class="op">argmax</span><span class="sub">s</span></span>
+          <span>E[&thinsp;pts(<i>s</i>)&thinsp;]</span>
+        </div>
+        <div class="formula-key">
+          <div class="row"><span class="sym">s</span><span>a scoreline you could submit</span></div>
+          <div class="row"><span class="sym">P(i,&thinsp;j)</span><span>the market-implied chance the match ends i-j, read off the Dixon-Coles matrix below</span></div>
+          <div class="row"><span class="sym">pts(s,&thinsp;i,&thinsp;j)</span><span>the pool's 5 / 2 / 2 / 1 award for predicting s when the result is i-j</span></div>
+        </div>
       </div>
     </section>
 
