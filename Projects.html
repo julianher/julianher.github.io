@@ -170,6 +170,52 @@
   }
   .outro a:hover { border-color: var(--accent); }
 
+  /* ---- technology filter ---- */
+  .filter-bar {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px 16px;
+    margin: 0 0 40px;
+  }
+  .filter-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    flex: none;
+    padding-top: 5px;
+  }
+  .filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    min-width: 0;
+  }
+  .filter-chip {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.01em;
+    color: var(--ink-soft);
+    background: var(--bg-sunk);
+    border: 1px solid var(--rule-strong);
+    border-radius: 100px;
+    padding: 5px 13px;
+    cursor: pointer;
+    transition: color 0.14s ease, background 0.14s ease, border-color 0.14s ease;
+  }
+  .filter-chip:hover { color: var(--ink); border-color: var(--accent); }
+  .filter-chip.active {
+    color: var(--bg);
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .filter-chip.all { font-weight: 500; }
+
+  .project.hidden { display: none; }
+  .project.last-visible { border-bottom: 1px solid var(--rule); }
+
   @media (max-width: 600px) {
     .project {
       grid-template-columns: 1fr;
@@ -196,10 +242,15 @@
     <header class="intro">
       <div class="eyebrow"><span class="num">02</span><span>Selected work</span></div>
       <h1>Three projects<span class="period">.</span></h1>
-      <p>A small, honest sample of recent work: a Tableau dashboard, an AI support ecosystem, and an interactive decision-science model for a World Cup prediction pool.</p>
+      <p>A small, honest sample of recent work: a Tableau dashboard, an interactive decision-science model for a World Cup prediction pool, and an AI support ecosystem.</p>
     </header>
 
-    <div class="projects">
+    <div class="filter-bar" aria-label="Filter projects by technology">
+      <span class="filter-label">Filter by tech</span>
+      <div class="filter-chips" id="filterChips"></div>
+    </div>
+
+    <div class="projects" id="projects">
 
       <article class="project">
         <div class="project-index">001<span class="slash">/</span>03</div>
@@ -221,6 +272,27 @@
       <article class="project">
         <div class="project-index">002<span class="slash">/</span>03</div>
         <div class="project-body">
+          <h3>World Cup Prediction Pool</h3>
+          <p class="subtitle">Market-implied probabilities, optimised for a custom scoring rule.</p>
+          <p class="desc">
+            A decision-science logbook for the 2026 World Cup pool at Coempopular (~650 players). Rather than out-guessing the betting market, it treats market-implied odds as the best available estimator and squeezes an edge from two things rivals ignore: applying those odds systematically across all 104 matches, and optimising each pick for the pool's 5/2/2/1 scoring rule instead of for the likeliest scoreline. The pipeline de-vigs the odds, solves Poisson scoring rates, builds a Dixon-Coles score matrix, and picks the scoreline that maximises expected points, all re-implemented to run live in an interactive widget you can drive yourself.
+          </p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">NumPy · SciPy</span>
+            <span class="tag">Poisson</span>
+            <span class="tag">Data-driven Decision</span>
+            <span class="tag">Claude Code</span>
+            <span class="tag">Claude Artifacts</span>
+            <span class="tag">Git</span>
+          </div>
+          <a class="project-link" href="WorldCup-Polla.html">View project <span class="arrow">→</span></a>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-index">003<span class="slash">/</span>03</div>
+        <div class="project-body">
           <h3>AI Customer Support Ecosystem</h3>
           <p class="subtitle">A multi-modal AI assistant for FIU campus parking.</p>
           <p class="desc">
@@ -230,28 +302,10 @@
             <span class="tag">Expertise AI</span>
             <span class="tag">ElevenLabs</span>
             <span class="tag">Google Gemini</span>
-            <span class="tag">Custom knowledge base</span>
+            <span class="tag">RAG</span>
+            <span class="tag">Deep Research</span>
           </div>
           <a class="project-link" href="AI-Support-Ecosystem.html">View project <span class="arrow">→</span></a>
-        </div>
-      </article>
-
-      <article class="project">
-        <div class="project-index">003<span class="slash">/</span>03</div>
-        <div class="project-body">
-          <h3>World Cup Prediction Pool</h3>
-          <p class="subtitle">Market-implied probabilities, optimised for a custom scoring rule.</p>
-          <p class="desc">
-            A decision-science logbook for the 2026 World Cup pool at Coempopular (~650 players). Rather than out-guessing the betting market, it treats market-implied odds as the best available estimator and squeezes an edge from two things rivals ignore: applying those odds systematically across all 104 matches, and optimising each pick for the pool's 5/2/2/1 scoring rule instead of for the likeliest scoreline. The pipeline de-vigs the odds, solves Poisson scoring rates, builds a Dixon-Coles score matrix, and picks the scoreline that maximises expected points, all re-implemented to run live in an interactive widget you can drive yourself.
-          </p>
-          <div class="tags">
-            <span class="tag">Python</span>
-            <span class="tag">NumPy · SciPy</span>
-            <span class="tag">Dixon-Coles</span>
-            <span class="tag">Decision science</span>
-            <span class="tag">Interactive viz</span>
-          </div>
-          <a class="project-link" href="WorldCup-Polla.html">View project <span class="arrow">→</span></a>
         </div>
       </article>
 
@@ -268,5 +322,75 @@
     </footer>
 
   </main>
+
+  <script>
+  (function () {
+    var projectsEl = document.getElementById('projects');
+    var chipsWrap = document.getElementById('filterChips');
+    if (!projectsEl || !chipsWrap) return;
+    var articles = Array.prototype.slice.call(projectsEl.querySelectorAll('.project'));
+
+    // Collect each project's tags + the unique technology list (in DOM order).
+    var order = [], seen = {};
+    articles.forEach(function (a) {
+      var tags = Array.prototype.slice.call(a.querySelectorAll('.tag'))
+        .map(function (t) { return t.textContent.trim(); });
+      a._tags = tags.map(function (t) { return t.toLowerCase(); });
+      tags.forEach(function (t) {
+        var key = t.toLowerCase();
+        if (!seen[key]) { seen[key] = true; order.push(t); }
+      });
+    });
+
+    var active = new Set();
+
+    function makeChip(label, isAll) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'filter-chip' + (isAll ? ' all' : '');
+      b.textContent = label;
+      b.setAttribute('aria-pressed', 'false');
+      if (isAll) {
+        b.addEventListener('click', function () { active.clear(); render(); });
+      } else {
+        b.dataset.key = label.toLowerCase();
+        b.addEventListener('click', function () {
+          var k = b.dataset.key;
+          if (active.has(k)) active.delete(k); else active.add(k);
+          render();
+        });
+      }
+      return b;
+    }
+
+    var allChip = makeChip('All', true);
+    chipsWrap.appendChild(allChip);
+    var techChips = order.map(function (label) {
+      var c = makeChip(label, false);
+      chipsWrap.appendChild(c);
+      return c;
+    });
+
+    function render() {
+      allChip.classList.toggle('active', active.size === 0);
+      allChip.setAttribute('aria-pressed', active.size === 0 ? 'true' : 'false');
+      techChips.forEach(function (c) {
+        var on = active.has(c.dataset.key);
+        c.classList.toggle('active', on);
+        c.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      var lastVisible = null;
+      articles.forEach(function (a) {
+        var show = active.size === 0 || a._tags.some(function (t) { return active.has(t); });
+        a.classList.toggle('hidden', !show);
+        a.classList.remove('last-visible');
+        if (show) lastVisible = a;
+      });
+      if (lastVisible) lastVisible.classList.add('last-visible');
+    }
+
+    render();
+  })();
+  </script>
 </body>
 </html>

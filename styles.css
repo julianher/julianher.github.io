@@ -193,6 +193,23 @@ footer.foot {
   color: var(--ink-mute);
 }
 
+/* ---- back-to-projects link (detail pages) ---- */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  text-decoration: none;
+  margin-bottom: 22px;
+  transition: color 0.15s ease, gap 0.18s ease;
+}
+.back-link:hover { color: var(--accent); gap: 11px; }
+.back-link .ar { font-size: 14px; line-height: 1; }
+
 /* ---- responsive ---- */
 @media (max-width: 600px) {
   .page { padding: 40px 22px 80px; }
