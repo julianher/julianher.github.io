@@ -695,7 +695,7 @@
 
     <header class="project-hero">
       <h1>World Cup Prediction Pool<span class="period">.</span></h1>
-      <p class="tagline">A decision-science logbook for the 2026 World Cup. It doesn't try to out-predict the betting market — it treats the market as the best estimator there is, then squeezes a real edge out of applying it <em>systematically</em> and optimising every pick for the pool's unusual scoring rule.</p>
+      <p class="tagline">A decision-science logbook for the 2026 World Cup. It doesn't try to out-predict the betting market. It treats the market as the best estimator there is, then squeezes a real edge out of applying it <em>systematically</em> and optimising every pick for the pool's unusual scoring rule.</p>
 
       <div class="meta-strip">
         <div class="item">
@@ -713,16 +713,27 @@
       </div>
     </header>
 
+    <!-- ============ THE STORY ============ -->
+    <section>
+      <div class="section-label"><span class="num">01</span><span>The idea</span></div>
+      <h2 class="section-title">An edge without a crystal ball.</h2>
+      <div class="prose">
+        <p>Every four years, the Coempopular credit union runs an office World Cup pool. Around <strong>650 people</strong> pay in, try to predict the exact scoreline of all <strong>104 matches</strong>, and chase a prize that mostly comes down to who guessed luckiest. Most players fill it in the obvious way: with their heart, their habits, and a soft spot for the teams they love.</p>
+        <p>I wanted to know whether you could treat it as a decision problem instead. Not by predicting football better than everyone else, because that part is a trap. Modern betting markets already fold in injuries, form and team news faster and more accurately than any one person ever could. So I took the opposite stance. I assume the market is right, and ask a smaller, answerable question: how much of an edge comes purely from applying that market view <strong>consistently, across every single match</strong>, while most rivals are guessing, and from tailoring each pick to this pool's unusual scoring rule rather than to the likeliest result?</p>
+        <p>Two things make that edge real, even with no secret information. There is no house cut, so the small advantage a bookmaker would normally swallow lands straight in your points total. And the scoring rule rewards something the market never optimises for: it pays 5 points for the right result, 2 each for the exact home and away goals, and 1 for the goal difference, so the scoreline that earns the most points on average is usually <em>not</em> the single most probable score. That gap, between what is likely and what is profitable, is the whole game. The project is judged on the quality of that process, not on whether it wins, because in a single tournament luck still rules.</p>
+      </div>
+    </section>
+
     <!-- ============ INTERACTIVE ENGINE ============ -->
     <section>
-      <div class="section-label"><span class="num">01</span><span>Interactive model</span></div>
-      <h2 class="section-title">Drive the engine yourself.</h2>
+      <div class="section-label"><span class="num">02</span><span>Interactive model</span></div>
+      <h2 class="section-title">Now drive it yourself.</h2>
       <p class="engine-note">
-        This is the actual pipeline that picks every scoreline, re-implemented to run live in your browser.
-        Move the sliders to set a match's market probabilities — or load a real captured match — and watch
-        the model de-vig the odds, solve the two Poisson scoring rates, build the Dixon-Coles score matrix,
-        and choose the scoreline that <em>maximises expected points</em> under the pool's rule. The point-maximising
-        pick often isn't the single most likely score — and that gap is where the edge lives.
+        Here is that whole idea turned into a working machine, rebuilt to run live in your browser.
+        Set a match's market odds with the sliders, or load one of the real matches I have already locked in,
+        and watch the model strip the bookmaker margin, solve the two scoring rates hidden inside the odds,
+        build the full grid of possible scorelines, and land on the one that <em>maximises expected points</em>.
+        Keep an eye on how often the pick it chooses is not the most likely score. That is the idea, made tangible.
       </p>
 
       <div class="engine-bleed">
@@ -742,21 +753,21 @@
                 <div class="slider-row">
                   <div class="slider-top">
                     <span class="name"><span class="sw" style="background:var(--accent)"></span>Home win</span>
-                    <span class="val"><span id="vHome">69.0</span>% <span class="dv">→ <span id="dHome">—</span></span></span>
+                    <span class="val"><span id="vHome">69.0</span>% <span class="dv">→ <span id="dHome">…</span></span></span>
                   </div>
                   <input type="range" id="sHome" min="1" max="98" step="0.1" value="69" autocomplete="off">
                 </div>
                 <div class="slider-row">
                   <div class="slider-top">
                     <span class="name"><span class="sw" style="background:var(--rule-strong)"></span>Draw</span>
-                    <span class="val"><span id="vDraw">21.0</span>% <span class="dv">→ <span id="dDraw">—</span></span></span>
+                    <span class="val"><span id="vDraw">21.0</span>% <span class="dv">→ <span id="dDraw">…</span></span></span>
                   </div>
                   <input type="range" id="sDraw" min="1" max="98" step="0.1" value="21" autocomplete="off">
                 </div>
                 <div class="slider-row">
                   <div class="slider-top">
                     <span class="name"><span class="sw" style="background:var(--ink-mute)"></span>Away win</span>
-                    <span class="val"><span id="vAway">11.0</span>% <span class="dv">→ <span id="dAway">—</span></span></span>
+                    <span class="val"><span id="vAway">11.0</span>% <span class="dv">→ <span id="dAway">…</span></span></span>
                   </div>
                   <input type="range" id="sAway" min="1" max="98" step="0.1" value="11" autocomplete="off">
                 </div>
@@ -805,7 +816,7 @@
                 <div class="pb-lbl">Model's optimal pick</div>
                 <div class="pb-score">
                   <span id="pbHome">Mexico</span>
-                  <span class="vs"><span id="pbSH">1</span>–<span id="pbSA">0</span></span>
+                  <span class="vs"><span id="pbSH">1</span>-<span id="pbSA">0</span></span>
                   <span id="pbAway">South Africa</span>
                 </div>
                 <div class="pb-meta">
@@ -826,7 +837,7 @@
                 </div>
                 <div class="rstat">
                   <div class="rk">Most likely score</div>
-                  <div class="rv" id="rModal">1–0 <small id="rModalP">15%</small></div>
+                  <div class="rv" id="rModal">1-0 <small id="rModalP">15%</small></div>
                 </div>
                 <div class="rstat">
                   <div class="rk">Expected total goals</div>
@@ -887,17 +898,6 @@
       </div>
     </section>
 
-    <!-- ============ OVERVIEW ============ -->
-    <section>
-      <div class="section-label"><span class="num">02</span><span>Overview</span></div>
-      <h2 class="section-title">An edge without a crystal ball.</h2>
-      <div class="prose">
-        <p>Coempopular runs a World Cup pool — a <strong>"polla"</strong> — with roughly <strong>650 participants</strong> and one quirky scoring rule. Most people fill it in on gut feel and loyalty. I treated it as a decision problem instead, and built a documented, reproducible process for all 104 matches.</p>
-        <p>The thesis is deliberately humble: I am <em>not</em> claiming to predict football better than the market. Sharp betting markets already price in injuries, form and lineups faster than any individual can. So I take the market's probabilities as given — the best estimator available — and ask a narrower question: <strong>how much edge comes purely from applying it consistently while rivals guess, and from optimising for this pool's specific scoring rule rather than for the most likely scoreline?</strong></p>
-        <p>Two structural facts make that edge real. First, <strong>there's no vig drag</strong> — the pool charges no per-pick commission, so a small informational edge that a bookmaker's margin would normally eat translates straight into points. Second, <strong>the scoring rule isn't what the market optimises for</strong>: the point-maximising scoreline is generally not the most probable one, which leaves room to optimise on top of the market. The project is judged on decision quality, not on whether it wins — variance dominates any single tournament.</p>
-      </div>
-    </section>
-
     <!-- ============ METHOD ============ -->
     <section>
       <div class="section-label"><span class="num">03</span><span>Method</span></div>
@@ -939,23 +939,23 @@
       <div class="stack-list">
         <div class="stack-item">
           <div class="head">Shin de-vigging</div>
-          <div class="body">A 1992 method that models the overround as informed-money pressure and backs out fair probabilities — better-calibrated than naïve normalisation on higher-margin books, and it collapses to simple normalisation when the margin is near zero, so it's safe to apply everywhere.</div>
+          <div class="body">A 1992 method that models the overround as informed-money pressure and backs out fair probabilities. It is better-calibrated than naïve normalisation on higher-margin books, and it collapses to simple normalisation when the margin is near zero, so it is safe to apply everywhere.</div>
         </div>
         <div class="stack-item">
           <div class="head">Poisson goal model + λ solver</div>
-          <div class="body">A small weighted least-squares fit recovers the two scoring rates (λ home, λ away) that make the model reproduce the market's 1X2 split and over/under total simultaneously — the 1X2 fixes who's favoured, the total fixes how many goals.</div>
+          <div class="body">A small weighted least-squares fit recovers the two scoring rates (λ home, λ away) that make the model reproduce the market's 1X2 split and over/under total at the same time. The 1X2 fixes who is favoured; the total fixes how many goals.</div>
         </div>
         <div class="stack-item">
           <div class="head">Dixon-Coles correction</div>
-          <div class="body">Independent Poisson famously underweights 0-0 and 1-1. The Dixon-Coles low-score correction (ρ ≈ −0.10) lifts those cells back to realistic levels, which matters because draws are exactly where the scoring rule pays off in tight matches.</div>
+          <div class="body">Independent Poisson famously underweights 0-0 and 1-1. The Dixon-Coles low-score correction (ρ ≈ -0.10) lifts those cells back to realistic levels, which matters because draws are exactly where the scoring rule pays off in tight matches.</div>
         </div>
         <div class="stack-item">
           <div class="head">Expected-points optimiser</div>
-          <div class="body">The pool scores 5/2/2/1 — result type, exact home goals, exact away goals, goal difference (doubled in knockouts). For each candidate scoreline the engine integrates points over the entire matrix and submits the argmax, not the mode.</div>
+          <div class="body">The pool scores on a 5/2/2/1 basis: result type, exact home goals, exact away goals, and goal difference (doubled in knockouts). For each candidate scoreline the engine integrates points over the entire matrix and submits the argmax, not the mode.</div>
         </div>
         <div class="stack-item">
           <div class="head">Git as a tamper-evident logbook</div>
-          <div class="body">Every capture is committed and tagged with a server-timestamped GitHub Release <em>before</em> kickoff. The commit history is the proof that each pick was made on prior information — which is what makes a claim about decision quality credible.</div>
+          <div class="body">Every capture is committed and tagged with a server-timestamped GitHub Release <em>before</em> kickoff. The commit history is the proof that each pick was made on prior information, which is what makes a claim about decision quality credible.</div>
         </div>
       </div>
     </section>
@@ -967,7 +967,7 @@
       <div class="stack-list">
         <div class="stack-item">
           <div class="head">Probabilistic modelling</div>
-          <div class="body">Translating market prices into a calibrated joint distribution over outcomes — de-vigging, Poisson/Dixon-Coles fitting, and inverse-problem solving for latent scoring rates.</div>
+          <div class="body">Translating market prices into a calibrated joint distribution over outcomes: de-vigging, Poisson/Dixon-Coles fitting, and inverse-problem solving for latent scoring rates.</div>
         </div>
         <div class="stack-item">
           <div class="head">Optimisation under a custom objective</div>
@@ -975,7 +975,7 @@
         </div>
         <div class="stack-item">
           <div class="head">Market microstructure literacy</div>
-          <div class="body">Reading prediction-market prices correctly — mid versus ask, the bid-ask spread on thin markets, when to renormalise and when not to — so the inputs are clean before any modelling begins.</div>
+          <div class="body">Reading prediction-market prices correctly (mid versus ask, the bid-ask spread on thin markets, when to renormalise and when not to) so the inputs are clean before any modelling begins.</div>
         </div>
         <div class="stack-item">
           <div class="head">Reproducible, auditable process</div>
@@ -993,28 +993,28 @@
           <div class="ix">001<span class="slash">/</span>04</div>
           <div>
             <h3>The favourite's 1-0<span class="em">. Built for partial credit.</span></h3>
-            <p>Across most group games the optimiser lands on a tight favourite win — 1-0 or 2-1 — even when no single scoreline clears 16%. A modest lead like 1-0 cashes the 5-point result <em>and</em> stays close on goal difference and the exact-goal bonuses across many nearby outcomes, so it collects partial credit far more often than a flashier guess. In tighter matches it diverges from the single likeliest score entirely — try it in the engine above and watch the outlined pick drift off the darkest cell.</p>
+            <p>Across most group games the optimiser lands on a tight favourite win, a 1-0 or a 2-1, even when no single scoreline clears 16%. A modest lead like 1-0 cashes the 5-point result <em>and</em> stays close on goal difference and the exact-goal bonuses across many nearby outcomes, so it collects partial credit far more often than a flashier guess. In tighter matches it drifts away from the single likeliest score entirely. Try it in the engine above and watch the outlined pick leave the darkest cell.</p>
           </div>
         </article>
         <article class="feature">
           <div class="ix">002<span class="slash">/</span>04</div>
           <div>
             <h3>When a draw becomes optimal<span class="em">. In genuinely even games.</span></h3>
-            <p>Drag the three 1X2 sliders close together and the optimiser abandons the 1-0 and picks the draw, 0-0 or 1-1. When neither side is favoured, a low-scoring draw becomes the most likely single outcome and the Dixon-Coles correction makes those draws likelier still — so it's the highest-expectation play. The model reasons its way there; I never hard-code a draw. This shows up most in knockout rounds, simply because qualified teams tend to be evenly matched — the stage toggle above just reflects that those points count double.</p>
+            <p>Drag the three 1X2 sliders close together and the optimiser abandons the 1-0 and picks the draw, a 0-0 or a 1-1. When neither side is favoured, a low-scoring draw becomes the most likely single outcome and the Dixon-Coles correction makes those draws likelier still, so it becomes the highest-expectation play. The model reasons its way there; I never hard-code a draw. This shows up most in the knockout rounds, simply because qualified teams tend to be evenly matched. The stage toggle above just reflects that those points count double.</p>
           </div>
         </article>
         <article class="feature">
           <div class="ix">003<span class="slash">/</span>04</div>
           <div>
             <h3>Reading the price, not the button<span class="em">. Mid vs ask.</span></h3>
-            <p>Polymarket shows a bold headline probability (the mid) and a green buy button (the ask, inflated by the spread). The capture rule is strict: always record the headline, never the button — and champion odds to one decimal, because a 0.2% gap is what decides who you crown. Small discipline, but it's the difference between clean inputs and quietly biased ones.</p>
+            <p>Polymarket shows a bold headline probability (the mid) and a green buy button (the ask, inflated by the spread). The capture rule is strict: always record the headline, never the button, and champion odds to one decimal, because a 0.2% gap is what decides who you crown. Small discipline, but it is the difference between clean inputs and quietly biased ones.</p>
           </div>
         </article>
         <article class="feature">
           <div class="ix">004<span class="slash">/</span>04</div>
           <div>
             <h3>Two sources, one honest comparison<span class="em">. Measured after the fact.</span></h3>
-            <p>Only Polymarket feeds the submitted picks. A second book (Codere) is captured in parallel but never used live — purely so that, at the end, I can score three strategies against real results and answer empirically which source and which method would have placed best. The official source never changes mid-tournament; that's what keeps the comparison fair.</p>
+            <p>Only Polymarket feeds the submitted picks. A second book (Codere) is captured in parallel but never used live, purely so that, at the end, I can score three strategies against real results and answer empirically which source and which method would have placed best. The official source never changes mid-tournament; that is what keeps the comparison fair.</p>
           </div>
         </article>
       </div>
@@ -1024,7 +1024,7 @@
     <section>
       <div class="section-label"><span class="num">07</span><span>Live results</span></div>
       <h2 class="section-title">How it's going.</h2>
-      <p class="engine-note">A running logbook, updated as matches are played. Standings move with registration and with every scored match — this is a snapshot, not a final result.</p>
+      <p class="engine-note">A running logbook, updated as matches are played. Standings move with registration and with every scored match, so this is a snapshot, not a final result.</p>
       <div class="kpis">
         <div class="kpi">
           <span class="num">91</span>
@@ -1035,8 +1035,8 @@
           <span class="lbl">Matches locked &amp; committed before kickoff</span>
         </div>
         <div class="kpi">
-          <span class="num">0–1</span>
-          <span class="lbl">Haiti–Scotland · exact scoreline nailed</span>
+          <span class="num">0-1</span>
+          <span class="lbl">Haiti vs Scotland · exact scoreline nailed</span>
         </div>
       </div>
     </section>
@@ -1055,7 +1055,7 @@
 
 <script>
 /* =====================================================================
-   Dixon-Coles / Poisson engine — faithful JS port of src/polla_model.py.
+   Dixon-Coles / Poisson engine, a faithful JS port of src/polla_model.py.
    Validated cell-for-cell against the SciPy implementation.
    ===================================================================== */
 const FACT = [1,1,2,6,24,120,720,5040,40320,362880,3628800,39916800];
@@ -1264,7 +1264,7 @@ function doCompute(){
   /* ---- stats ---- */
   $("rLamH").textContent=lh.toFixed(2);
   $("rLamA").textContent=la.toFixed(2);
-  $("rModal").innerHTML=`${modal.i}–${modal.j} <small>${(modal.px*100).toFixed(0)}%</small>`;
+  $("rModal").innerHTML=`${modal.i}-${modal.j} <small>${(modal.px*100).toFixed(0)}%</small>`;
   $("rTot").textContent=eTot.toFixed(2);
 
   /* ---- 1X2 comparison bars ---- */
@@ -1304,7 +1304,7 @@ function doCompute(){
       cell.style.background=fill(t);
       cell.style.color=cellText(t);
       cell.textContent = useEv ? c.ev.toFixed(1) : (c.px*100>=0.5?Math.round(c.px*100):"");
-      cell.title=`${i}–${j}  ·  P=${(c.px*100).toFixed(1)}%  ·  E=${c.ev.toFixed(2)} pts`;
+      cell.title=`${i}-${j}  ·  P=${(c.px*100).toFixed(1)}%  ·  E=${c.ev.toFixed(2)} pts`;
       if(i===best.i&&j===best.j){ cell.classList.add("optimal"); const tag=document.createElement("span"); tag.className="tag"; tag.textContent="pick"; cell.appendChild(tag); }
       if(i===modal.i&&j===modal.j) cell.classList.add("modal");
       grid.appendChild(cell);
@@ -1317,7 +1317,7 @@ function doCompute(){
   byEv.slice(0,5).forEach((c,k)=>{
     const r=document.createElement("div");
     r.className="alt-row"+(k===0?" lead":"");
-    r.innerHTML=`<span class="as">${c.i}–${c.j}</span><span class="ax">P ${(c.px*100).toFixed(0)}%</span><span class="ae">${c.ev.toFixed(2)} E</span>`;
+    r.innerHTML=`<span class="as">${c.i}-${c.j}</span><span class="ax">P ${(c.px*100).toFixed(0)}%</span><span class="ae">${c.ev.toFixed(2)} E</span>`;
     altWrap.appendChild(r);
   });
 
@@ -1328,12 +1328,12 @@ function doCompute(){
     `(${(mh*100).toFixed(0)}/${(md*100).toFixed(0)}/${(ma*100).toFixed(0)}) matches the de-vigged market ` +
     `(${(ph*100).toFixed(0)}/${(pd*100).toFixed(0)}/${(pa*100).toFixed(0)}). ` +
     `Scoring is ${ruleTxt} on result type / exact home goals / exact away goals / goal difference. ` +
-    `The pick <b>${best.i}–${best.j}</b> maximises expected points` +
-    (best.i===modal.i&&best.j===modal.j ? " — here it also happens to be the single most likely score."
-      : `, even though <b>${modal.i}–${modal.j}</b> is the most likely single score. That divergence is the edge.`);
+    `The pick <b>${best.i}-${best.j}</b> maximises expected points` +
+    (best.i===modal.i&&best.j===modal.j ? ", and here it is also the single most likely score."
+      : `, even though <b>${modal.i}-${modal.j}</b> is the most likely single score. That divergence is the edge.`);
 }
 
-// deterministic init — load the first preset so a browser form-restore can't desync the sliders
+// deterministic init: load the first preset so a browser form-restore can't desync the sliders
 loadPreset(PRESETS[0], chipEls[0]);
 </script>
 </body>
