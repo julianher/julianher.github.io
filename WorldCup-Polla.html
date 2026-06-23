@@ -1259,7 +1259,7 @@
 
       <div class="chart-card">
         <p class="chart-title">Climbing the table</p>
-        <p class="chart-sub">Rank among the field after each matchday. Lower is better, so up is good. A draw-heavy round dropped the picks to 311th before seven exacts pulled them back to 32nd of 665.</p>
+        <p class="chart-sub">Rank among all 665 players after each matchday (lower is better, so up is good). The dashed lines mark the top 5, 10, 25 and 50% of the field. A draw-heavy round dropped the picks to 311th, just inside the top half, before seven exacts pulled them up to 32nd, inside the top 5%.</p>
         <svg class="chart-svg" id="chartRank" viewBox="0 0 680 300" role="img" aria-label="Rank over time, climbing from 118th to 32nd of 665"></svg>
       </div>
 
@@ -1628,7 +1628,7 @@ loadPreset(PRESETS[0], chipEls[0]);
 
   // generic line chart into a 680x300 viewBox svg
   function lineChart(svg, opts) {
-    const W = 680, H = 300, pad = { l: 48, r: 56, t: 18, b: 34 };
+    const W = 680, H = 300, pad = { l: 48, r: 64, t: 18, b: 34 };
     const plotW = W - pad.l - pad.r, plotH = H - pad.t - pad.b, n = opts.xCount;
     const xAt = i => pad.l + (n <= 1 ? 0 : (i / (n - 1)) * plotW);
     const yAt = v => {
@@ -1642,6 +1642,12 @@ loadPreset(PRESETS[0], chipEls[0]);
       svg.appendChild(el("line", { x1: pad.l, y1: y, x2: W - pad.r, y2: y, "stroke-width": 1 },
         { stroke: "var(--rule)" }));
       svg.appendChild(label(pad.l - 9, y + 3.5, tk.label, "end"));
+    });
+    (opts.refLines || []).forEach(rl => {
+      const y = yAt(rl.v);
+      svg.appendChild(el("line", { x1: pad.l, y1: y, x2: W - pad.r, y2: y, "stroke-width": 1, "stroke-dasharray": "3 4" },
+        { stroke: "var(--rule-strong)" }));
+      svg.appendChild(label(pad.l - 9, y + 3.3, rl.label, "end", { "font-size": "9.5px" }));
     });
     (opts.xTicks || []).forEach(tk => {
       svg.appendChild(label(xAt(tk.i), H - pad.b + 18, tk.label, "middle"));
@@ -1668,9 +1674,14 @@ loadPreset(PRESETS[0], chipEls[0]);
     const svg = document.getElementById("chartRank");
     if (!svg) return;
     const st = RESULTS.standings, last = st.length - 1;
+    const N = st[last].n; // current field size, so the axis shows the real number of players
     lineChart(svg, {
-      yMin: 1, yMax: 330, invertY: true, xCount: st.length,
-      yTicks: [{ v: 1, label: "1st" }, { v: 110, label: "110" }, { v: 220, label: "220" }, { v: 330, label: "330" }],
+      yMin: 1, yMax: N, invertY: true, xCount: st.length,
+      yTicks: [{ v: 1, label: "1st" }, { v: N, label: N + "th" }],
+      refLines: [
+        { v: 0.05 * N, label: "top 5%" }, { v: 0.10 * N, label: "top 10%" },
+        { v: 0.25 * N, label: "top 25%" }, { v: 0.50 * N, label: "top 50%" }
+      ],
       xTicks: [{ i: 0, label: "MD1" }, { i: 5, label: "MD6" }, { i: 9, label: "MD9" }, { i: last, label: "MD12" }],
       series: [{
         points: st.map(d => d.pos), color: "var(--accent)", width: 2.5,
