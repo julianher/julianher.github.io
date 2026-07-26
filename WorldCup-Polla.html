@@ -150,35 +150,6 @@
     max-width: 62ch;
   }
 
-  /* ---- KPI callouts ---- */
-  .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  .kpi {
-    border: 1px solid var(--rule);
-    border-radius: 4px;
-    background: var(--bg);
-    padding: 24px 22px 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .kpi .num {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: clamp(28px, 3.8vw, 40px);
-    line-height: 1;
-    letter-spacing: -0.02em;
-    color: var(--accent);
-    font-variation-settings: "opsz" 60;
-  }
-  .kpi .lbl {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    line-height: 1.4;
-  }
-
   /* ---- pipeline ---- */
   .pipeline {
     display: flex;
@@ -352,14 +323,6 @@
     color: var(--ink);
     font-weight: 500;
     font-size: 15.5px;
-  }
-  .score-rule td.nat {
-    text-align: right;
-    font-family: var(--mono);
-    font-size: 10.5px;
-    color: var(--ink-mute);
-    white-space: nowrap;
-    width: 88px;
   }
 
   /* ==========================================================
@@ -795,7 +758,6 @@
   }
   @media (max-width: 700px) {
     .meta-strip { grid-template-columns: 1fr; gap: 14px; padding: 18px 0; }
-    .kpis { grid-template-columns: 1fr; }
     .feature { grid-template-columns: 1fr; gap: 8px; padding: 28px 0; }
     .feature .ix { padding-top: 0; }
     .stack-item { padding: 18px 22px; }
@@ -1188,32 +1150,18 @@
       </div>
     </section>
 
-    <!-- ============ THE FINISH ============ -->
+    <!-- ============ THE SEASON ============ -->
     <section>
-      <div class="section-label"><span class="num">07</span><span>The finish</span></div>
-      <h2 class="section-title">Fourth of 641.</h2>
+      <div class="section-label"><span class="num">07</span><span>How it went</span></div>
+      <h2 class="section-title">Two weeks of looking wrong.</h2>
       <div class="prose">
-        <p>The tournament is over. 104 matches, every pick committed to Git before its kickoff. By the rules set on day one, this finished <strong>4th of 641</strong> with <strong>711 points</strong>: 671 from matches, plus 30 for calling Spain champion and 10 for calling England third. The pot paid the top three. It missed by two points.</p>
-      </div>
-
-      <div class="kpis">
-        <div class="kpi">
-          <span class="num">4th</span>
-          <span class="lbl">Of 641 players · the top 0.6%</span>
-        </div>
-        <div class="kpi">
-          <span class="num">711</span>
-          <span class="lbl">Points · 671 from matches, 40 from the podium</span>
-        </div>
-        <div class="kpi">
-          <span class="num">2</span>
-          <span class="lbl">Points short of the prize money</span>
-        </div>
+        <p>For the first six matchdays this looked like a bad idea. Draw after draw landed against picks built for favourites, and I sank to <strong>311th out of 641</strong>, the bottom half of the table, watching people who picked with their heart sail past me.</p>
+        <p>Nothing was broken. The process was just being paid slowly.</p>
       </div>
 
       <div class="chart-card">
         <p class="chart-title">A season in the pool</p>
-        <p class="chart-sub">Position after every scored round, on a logarithmic rank axis so the crowded top of the table stays readable. The whole field is on the scale, from 1st all the way down to 641st.</p>
+        <p class="chart-sub">Every scored round, on a logarithmic rank axis so the whole field fits: 1st at the top, 641st at the bottom.</p>
         <div class="chart-scroll"><svg class="chart-svg" viewBox="0 0 680 350" role="img" aria-labelledby="seasonTitle" xmlns="http://www.w3.org/2000/svg"><title id="seasonTitle">Position in the pool over the tournament, on a logarithmic rank axis: 118th at the start, down to 311th on matchday 6, up to 1st after the first knockout exact, and 4th of 641 at the close.</title>
 <line x1="56.0" y1="42.0" x2="658.0" y2="42.0" style="stroke:var(--rule)" stroke-width="1"/>
 <text x="47.0" y="45.6" text-anchor="end" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">1st</text>
@@ -1275,15 +1223,14 @@
 <circle cx="658.0" cy="97.8" r="2" style="fill:var(--accent)"/>
 <circle cx="135.2" cy="272.9" r="5" fill="none" style="stroke:var(--ink)" stroke-width="2"/>
 <circle cx="135.2" cy="272.9" r="2.5" style="fill:var(--accent)"/>
-<text x="145.2" y="294.9" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">311th: the matchday-6 low</text>
+<text x="145.2" y="294.9" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">311th: the low point</text>
 <circle cx="314.9" cy="42.0" r="5" fill="none" style="stroke:var(--ink)" stroke-width="2"/>
 <circle cx="314.9" cy="42.0" r="2.5" style="fill:var(--accent)"/>
-<text x="324.9" y="24.0" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">1st, after the first</text>
-<text x="324.9" y="37.0" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">knockout exact</text>
+<text x="324.9" y="28.0" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">1st, briefly</text>
 <circle cx="562.9" cy="160.5" r="5" fill="none" style="stroke:var(--ink)" stroke-width="2"/>
 <circle cx="562.9" cy="160.5" r="2.5" style="fill:var(--accent)"/>
-<text x="556.9" y="188.5" text-anchor="end" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">19th: the missed</text>
-<text x="556.9" y="201.5" text-anchor="end" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">semifinal entry</text>
+<text x="556.9" y="188.5" text-anchor="end" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">19th: the pick</text>
+<text x="556.9" y="201.5" text-anchor="end" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">I never saved</text>
 <circle cx="658.0" cy="97.8" r="5" fill="none" style="stroke:var(--ink)" stroke-width="2"/>
 <circle cx="658.0" cy="97.8" r="2.5" style="fill:var(--accent)"/>
 <text x="650.0" y="79.8" text-anchor="end" style="font-family:var(--mono);font-size:11px;fill:var(--ink);font-weight:600">4th of 641</text>
@@ -1291,78 +1238,22 @@
       </div>
 
       <div class="prose">
-        <p>For six matchdays this looked like a bad idea. Draw after draw landed against picks built for favourites, and by matchday 6 the entry sat <strong>311th</strong>, in the bottom half of the table. Nothing was wrong with the machine. It was simply being paid out slowly.</p>
-        <p>Then the same process, applied without flinching, did what processes do. The climb from 311th to 5th took eleven matchdays and no change of method. When the knockouts doubled the scoring, variance took the wheel: a doubled exact scoreline vaulted the entry from 5th to <strong>1st</strong>, two doubled draws in the quarterfinals knocked it back from 1st to 9th, and a semifinal pick that never got saved in the app cost 14 points and dropped it to 19th. The final week's strategy pivot climbed from 19th back to 4th.</p>
+        <p>Then the same method, unchanged, did what a method does. From 311th to 5th in eleven matchdays without touching a single rule. When the knockouts doubled the scoring, one exact scoreline put me <strong>1st of 641</strong>. Two doubled draws knocked me back down. And the last week, when only the top three got paid, I stopped playing for points and started playing for position.</p>
+        <p>Final: <strong>4th of 641</strong>, in the top 0.6%.</p>
       </div>
     </section>
 
-    <!-- ============ POST-MORTEM ============ -->
+    <!-- ============ THE MODEL KEPT ITS WORD ============ -->
     <section>
-      <div class="section-label"><span class="num">08</span><span>Post-mortem</span></div>
-      <h2 class="section-title">Short run, variance. Long run, data.</h2>
+      <div class="section-label"><span class="num">08</span><span>Did it work?</span></div>
+      <h2 class="section-title">The model kept its word.</h2>
       <div class="prose">
-        <p>One tournament is a single sample, and that is the trap in every result like this one. It cuts both ways: it is why a sound process can look foolish for six matchdays, and why a poor one can look brilliant for a week. The only honest way to grade the season is to ask what each strategy was <em>expected</em> to score before a ball moved, then compare it with what it actually got. The gap between those two numbers is luck, and it is measurable.</p>
+        <p>Before a single ball was kicked, the model had already told me what it expected to score: <strong>646 points, give or take 42</strong>. That is the number to judge it against, because a season is one sample and anyone can get hot for a week.</p>
       </div>
 
       <div class="chart-card">
-        <p class="chart-title">Was it a better strategy, or a luckier one?</p>
-        <p class="chart-sub">Seven strategies scored against the same 104 results, sorted by what the model expected them to score rather than by what they happened to score.</p>
-        <div class="chart-scroll"><svg class="chart-svg" viewBox="0 0 680 348" role="img" aria-labelledby="stratTitle" xmlns="http://www.w3.org/2000/svg"><title id="stratTitle">Seven strategies, each shown as expected points under the model against points actually scored over 104 matches, sorted by expectation.</title>
-<rect x="188" y="10" width="16" height="7" rx="3.5" style="fill:var(--ink-soft)"/>
-<text x="210.0" y="17.0" text-anchor="start" style="font-family:var(--mono);font-size:11px;fill:var(--ink-soft);font-weight:400">expected under the model</text>
-<rect x="374" y="10" width="16" height="7" rx="3.5" style="fill:var(--accent)"/>
-<text x="396.0" y="17.0" text-anchor="start" style="font-family:var(--mono);font-size:11px;fill:var(--ink-soft);font-weight:400">actually scored</text>
-<text x="176.0" y="53.0" text-anchor="end" style="font-family:var(--mono);font-size:11.5px;fill:var(--ink-soft);font-weight:400">Pure model argmax</text>
-<rect x="188" y="36" width="358.2" height="11" rx="4" style="fill:var(--ink-soft)"><title>Pure model argmax: 658</title></rect>
-<text x="553.2" y="45.5" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">658</text>
-<rect x="188" y="51" width="356.8" height="11" rx="4" style="fill:var(--accent)"><title>Pure model argmax: 655</title></rect>
-<text x="551.8" y="60.5" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink);font-weight:600">655</text>
-<text x="176.0" y="93.0" text-anchor="end" style="font-family:var(--mono);font-size:11.5px;fill:var(--ink-soft);font-weight:400">Favourite 1-0 chalk</text>
-<rect x="188" y="76" width="355.4" height="11" rx="4" style="fill:var(--ink-soft)"><title>Favourite 1-0 chalk: 652</title></rect>
-<text x="550.4" y="85.5" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">652</text>
-<rect x="188" y="91" width="354.1" height="11" rx="4" style="fill:var(--accent)"><title>Favourite 1-0 chalk: 650</title></rect>
-<text x="549.1" y="100.5" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink);font-weight:600">650</text>
-<text x="176.0" y="133.0" text-anchor="end" style="font-family:var(--mono);font-size:11.5px;fill:var(--ink-soft);font-weight:400">What I submitted</text>
-<rect x="188" y="116" width="352.1" height="11" rx="4" style="fill:var(--ink-soft)"><title>What I submitted: 646</title></rect>
-<text x="547.1" y="125.5" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">646</text>
-<rect x="188" y="131" width="365.5" height="11" rx="4" style="fill:var(--accent)"><title>What I submitted: 671</title></rect>
-<text x="560.5" y="140.5" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink);font-weight:600">671</text>
-<text x="672.0" y="133.0" text-anchor="end" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400;font-style:italic">+25 luck</text>
-<text x="176.0" y="173.0" text-anchor="end" style="font-family:var(--mono);font-size:11.5px;fill:var(--ink-soft);font-weight:400">Favourite 2-1 chalk</text>
-<rect x="188" y="156" width="334.5" height="11" rx="4" style="fill:var(--ink-soft)"><title>Favourite 2-1 chalk: 614</title></rect>
-<text x="529.5" y="165.5" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">614</text>
-<rect x="188" y="171" width="344.3" height="11" rx="4" style="fill:var(--accent)"><title>Favourite 2-1 chalk: 632</title></rect>
-<text x="539.3" y="180.5" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink);font-weight:600">632</text>
-<text x="672.0" y="173.0" text-anchor="end" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400;font-style:italic">+18 luck</text>
-<text x="176.0" y="213.0" text-anchor="end" style="font-family:var(--mono);font-size:11.5px;fill:var(--ink-soft);font-weight:400">Bookmaker's score board</text>
-<rect x="188" y="196" width="327.0" height="11" rx="4" style="fill:var(--ink-soft)"><title>Bookmaker's score board: 600</title></rect>
-<text x="522.0" y="205.5" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">600</text>
-<rect x="188" y="211" width="360.1" height="11" rx="4" style="fill:var(--accent)"><title>Bookmaker's score board: 661</title></rect>
-<text x="555.1" y="220.5" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink);font-weight:600">661</text>
-<text x="672.0" y="213.0" text-anchor="end" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400;font-style:italic">+61 luck</text>
-<text x="176.0" y="253.0" text-anchor="end" style="font-family:var(--mono);font-size:11.5px;fill:var(--ink-soft);font-weight:400">Know-nothing picker</text>
-<rect x="188" y="236" width="213.5" height="11" rx="4" style="fill:var(--ink-soft)"><title>Know-nothing picker: 392</title></rect>
-<text x="408.5" y="245.5" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">392</text>
-<rect x="188" y="251" width="213.5" height="11" rx="4" style="fill:var(--accent)"><title>Know-nothing picker: 392</title></rect>
-<text x="408.5" y="260.5" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink);font-weight:600">392</text>
-<text x="176.0" y="293.0" text-anchor="end" style="font-family:var(--mono);font-size:11.5px;fill:var(--ink-soft);font-weight:400">Always 1-1</text>
-<rect x="188" y="276" width="197.4" height="11" rx="4" style="fill:var(--ink-soft)"><title>Always 1-1: 362</title></rect>
-<text x="392.4" y="285.5" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">362</text>
-<rect x="188" y="291" width="231.0" height="11" rx="4" style="fill:var(--accent)"><title>Always 1-1: 424</title></rect>
-<text x="426.0" y="300.5" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink);font-weight:600">424</text>
-<text x="672.0" y="293.0" text-anchor="end" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400;font-style:italic">+62 luck</text>
-<text x="188.0" y="340.0" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">points over 104 matches, sorted by expectation</text>
-</svg></div>
-      </div>
-
-      <div class="prose">
-        <p>This is the whole argument in one picture. Copying the bookmaker's own correct-score board <em>outscored</em> the model this tournament, 661 to 655, and a hasty reader would stop there and conclude the modelling was pointless. But that board was only expected to score 600. It collected <strong>+61 points of luck</strong>, the largest windfall in the table. "Always 1-1" collected +62, because the 2026 knockouts were freakishly draw-heavy, right down to a goalless final. Both were flattered by this specific tournament and would be punished in most others.</p>
-        <p>Rank the same seven by expectation and the order changes completely. The model's argmax sits on top at 657 expected points, ahead of every baseline available, and it landed within 2.5 points of that promise. Over one tournament, variance writes the leaderboard. Over enough tournaments, the expectation column <em>is</em> the leaderboard. <strong>In the short run the dice are king; in the long run the data is.</strong></p>
-      </div>
-
-      <div class="chart-card">
-        <p class="chart-title">Was the result luck?</p>
-        <p class="chart-sub">Two exact distributions on one axis, computed by convolution rather than simulation: what a picker with no information would score against these results, and what the model's own probabilities promised.</p>
+        <p class="chart-title">What guessing looks like, and what the model promised</p>
+        <p class="chart-sub">Both curves are exact distributions over the same 104 real results.</p>
         <div class="chart-scroll"><svg class="chart-svg" viewBox="0 0 680 310" role="img" aria-labelledby="distTitle" xmlns="http://www.w3.org/2000/svg"><title id="distTitle">Two distributions of total points: a know-nothing picker centred on 392 plus or minus 43, and the model's promise centred on 646 plus or minus 42. The delivered 671 sits just above the model's centre and far beyond the blind picker's range.</title>
 <line x1="20.0" y1="266.0" x2="660.0" y2="266.0" style="stroke:var(--rule-strong)" stroke-width="1"/>
 <text x="88.6" y="286.0" text-anchor="middle" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">300</text>
@@ -1374,51 +1265,77 @@
 <text x="340.0" y="303.0" text-anchor="middle" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">points over 104 matches</text>
 <polygon points="20,266 20.0,265.6 25.7,265.4 31.4,265.2 37.1,264.8 42.9,264.3 48.6,263.5 54.3,262.6 60.0,261.3 65.7,259.5 71.4,257.3 77.1,254.5 82.9,250.9 88.6,246.5 94.3,241.2 100.0,234.9 105.7,227.4 111.4,218.8 117.1,209.1 122.9,198.3 128.6,186.5 134.3,173.9 140.0,160.7 145.7,147.3 151.4,133.9 157.1,121.0 162.9,109.0 168.6,98.3 174.3,89.3 180.0,82.3 185.7,77.5 191.4,75.3 197.1,75.6 202.9,78.5 208.6,83.8 214.3,91.3 220.0,100.8 225.7,111.8 231.4,124.1 237.1,137.1 242.9,150.5 248.6,163.9 254.3,176.9 260.0,189.4 265.7,201.0 271.4,211.5 277.1,221.0 282.9,229.3 288.6,236.5 294.3,242.6 300.0,247.7 305.7,251.9 311.4,255.2 317.1,257.9 322.9,260.0 328.6,261.6 334.3,262.8 340.0,263.7 345.7,264.4 351.4,264.9 357.1,265.2 362.9,265.5 368.6,265.7 374.3,265.8 380.0,265.9 385.7,265.9 391.4,265.9 397.1,266.0 402.9,266.0 408.6,266.0 414.3,266.0 420.0,266.0 425.7,266.0 431.4,266.0 437.1,266.0 442.9,266.0 448.6,266.0 454.3,266.0 460.0,266.0 465.7,266.0 471.4,266.0 477.1,266.0 482.9,266.0 488.6,266.0 494.3,266.0 500.0,266.0 505.7,266.0 511.4,266.0 517.1,266.0 522.9,266.0 528.6,266.0 534.3,266.0 540.0,266.0 545.7,266.0 551.4,266.0 557.1,266.0 562.9,266.0 568.6,266.0 574.3,266.0 580.0,266.0 585.7,266.0 591.4,266.0 597.1,266.0 602.9,266.0 608.6,266.0 614.3,266.0 620.0,266.0 625.7,266.0 631.4,266.0 637.1,266.0 642.9,266.0 648.6,266.0 654.3,266.0 660.0,266.0 660,266" style="fill:var(--ink-soft);opacity:0.13"/>
 <polyline points="20.0,265.6 25.7,265.4 31.4,265.2 37.1,264.8 42.9,264.3 48.6,263.5 54.3,262.6 60.0,261.3 65.7,259.5 71.4,257.3 77.1,254.5 82.9,250.9 88.6,246.5 94.3,241.2 100.0,234.9 105.7,227.4 111.4,218.8 117.1,209.1 122.9,198.3 128.6,186.5 134.3,173.9 140.0,160.7 145.7,147.3 151.4,133.9 157.1,121.0 162.9,109.0 168.6,98.3 174.3,89.3 180.0,82.3 185.7,77.5 191.4,75.3 197.1,75.6 202.9,78.5 208.6,83.8 214.3,91.3 220.0,100.8 225.7,111.8 231.4,124.1 237.1,137.1 242.9,150.5 248.6,163.9 254.3,176.9 260.0,189.4 265.7,201.0 271.4,211.5 277.1,221.0 282.9,229.3 288.6,236.5 294.3,242.6 300.0,247.7 305.7,251.9 311.4,255.2 317.1,257.9 322.9,260.0 328.6,261.6 334.3,262.8 340.0,263.7 345.7,264.4 351.4,264.9 357.1,265.2 362.9,265.5 368.6,265.7 374.3,265.8 380.0,265.9 385.7,265.9 391.4,265.9 397.1,266.0 402.9,266.0 408.6,266.0 414.3,266.0 420.0,266.0 425.7,266.0 431.4,266.0 437.1,266.0 442.9,266.0 448.6,266.0 454.3,266.0 460.0,266.0 465.7,266.0 471.4,266.0 477.1,266.0 482.9,266.0 488.6,266.0 494.3,266.0 500.0,266.0 505.7,266.0 511.4,266.0 517.1,266.0 522.9,266.0 528.6,266.0 534.3,266.0 540.0,266.0 545.7,266.0 551.4,266.0 557.1,266.0 562.9,266.0 568.6,266.0 574.3,266.0 580.0,266.0 585.7,266.0 591.4,266.0 597.1,266.0 602.9,266.0 608.6,266.0 614.3,266.0 620.0,266.0 625.7,266.0 631.4,266.0 637.1,266.0 642.9,266.0 648.6,266.0 654.3,266.0 660.0,266.0" fill="none" style="stroke:var(--ink-soft)" stroke-width="2"/>
-<text x="193.6" y="51.1" text-anchor="middle" style="font-family:var(--mono);font-size:11.5px;fill:var(--ink-soft);font-weight:600">A know-nothing picker</text>
+<text x="193.6" y="51.1" text-anchor="middle" style="font-family:var(--mono);font-size:11.5px;fill:var(--ink-soft);font-weight:600">Guessing</text>
 <text x="193.6" y="64.1" text-anchor="middle" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">392 ± 43</text>
 <polygon points="20,266 20.0,266.0 25.7,266.0 31.4,266.0 37.1,266.0 42.9,266.0 48.6,266.0 54.3,266.0 60.0,266.0 65.7,266.0 71.4,266.0 77.1,266.0 82.9,266.0 88.6,266.0 94.3,266.0 100.0,266.0 105.7,266.0 111.4,266.0 117.1,266.0 122.9,266.0 128.6,266.0 134.3,266.0 140.0,266.0 145.7,266.0 151.4,266.0 157.1,266.0 162.9,266.0 168.6,266.0 174.3,266.0 180.0,266.0 185.7,266.0 191.4,266.0 197.1,266.0 202.9,266.0 208.6,266.0 214.3,266.0 220.0,266.0 225.7,266.0 231.4,266.0 237.1,266.0 242.9,266.0 248.6,266.0 254.3,266.0 260.0,266.0 265.7,266.0 271.4,266.0 277.1,266.0 282.9,266.0 288.6,265.9 294.3,265.9 300.0,265.9 305.7,265.8 311.4,265.7 317.1,265.5 322.9,265.2 328.6,264.9 334.3,264.4 340.0,263.7 345.7,262.8 351.4,261.5 357.1,259.8 362.9,257.6 368.6,254.8 374.3,251.3 380.0,246.9 385.7,241.6 391.4,235.2 397.1,227.7 402.9,218.9 408.6,209.0 414.3,197.9 420.0,185.8 425.7,172.9 431.4,159.3 437.1,145.5 442.9,131.8 448.6,118.6 454.3,106.3 460.0,95.4 465.7,86.2 471.4,79.2 477.1,74.5 482.9,72.5 488.6,73.1 494.3,76.4 500.0,82.2 505.7,90.3 511.4,100.4 517.1,112.0 522.9,124.8 528.6,138.4 534.3,152.2 540.0,165.9 545.7,179.2 551.4,191.7 557.1,203.4 562.9,213.9 568.6,223.3 574.3,231.4 580.0,238.4 585.7,244.3 591.4,249.2 597.1,253.1 602.9,256.3 608.6,258.8 614.3,260.7 620.0,262.2 625.7,263.3 631.4,264.1 637.1,264.7 642.9,265.1 648.6,265.4 654.3,265.6 660.0,265.7 660,266" style="fill:var(--accent);opacity:0.13"/>
 <polyline points="20.0,266.0 25.7,266.0 31.4,266.0 37.1,266.0 42.9,266.0 48.6,266.0 54.3,266.0 60.0,266.0 65.7,266.0 71.4,266.0 77.1,266.0 82.9,266.0 88.6,266.0 94.3,266.0 100.0,266.0 105.7,266.0 111.4,266.0 117.1,266.0 122.9,266.0 128.6,266.0 134.3,266.0 140.0,266.0 145.7,266.0 151.4,266.0 157.1,266.0 162.9,266.0 168.6,266.0 174.3,266.0 180.0,266.0 185.7,266.0 191.4,266.0 197.1,266.0 202.9,266.0 208.6,266.0 214.3,266.0 220.0,266.0 225.7,266.0 231.4,266.0 237.1,266.0 242.9,266.0 248.6,266.0 254.3,266.0 260.0,266.0 265.7,266.0 271.4,266.0 277.1,266.0 282.9,266.0 288.6,265.9 294.3,265.9 300.0,265.9 305.7,265.8 311.4,265.7 317.1,265.5 322.9,265.2 328.6,264.9 334.3,264.4 340.0,263.7 345.7,262.8 351.4,261.5 357.1,259.8 362.9,257.6 368.6,254.8 374.3,251.3 380.0,246.9 385.7,241.6 391.4,235.2 397.1,227.7 402.9,218.9 408.6,209.0 414.3,197.9 420.0,185.8 425.7,172.9 431.4,159.3 437.1,145.5 442.9,131.8 448.6,118.6 454.3,106.3 460.0,95.4 465.7,86.2 471.4,79.2 477.1,74.5 482.9,72.5 488.6,73.1 494.3,76.4 500.0,82.2 505.7,90.3 511.4,100.4 517.1,112.0 522.9,124.8 528.6,138.4 534.3,152.2 540.0,165.9 545.7,179.2 551.4,191.7 557.1,203.4 562.9,213.9 568.6,223.3 574.3,231.4 580.0,238.4 585.7,244.3 591.4,249.2 597.1,253.1 602.9,256.3 608.6,258.8 614.3,260.7 620.0,262.2 625.7,263.3 631.4,264.1 637.1,264.7 642.9,265.1 648.6,265.4 654.3,265.6 660.0,265.7" fill="none" style="stroke:var(--accent)" stroke-width="2"/>
 <text x="472.3" y="48.4" text-anchor="end" style="font-family:var(--mono);font-size:11.5px;fill:var(--accent);font-weight:600">What the model promised</text>
 <text x="472.3" y="61.4" text-anchor="end" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">646 ± 42</text>
-<line x1="512.6" y1="42.4" x2="512.6" y2="266.0" style="stroke:var(--ink)" stroke-width="2" stroke-dasharray="4 3"/>
-<text x="520.6" y="48.4" text-anchor="start" style="font-family:var(--mono);font-size:11.5px;fill:var(--ink);font-weight:600">delivered 671</text>
-<text x="520.6" y="61.4" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">z = +0.58 vs promise</text>
+<line x1="512.6" y1="38.0" x2="512.6" y2="266.0" style="stroke:var(--ink)" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="512.6" y="17.0" text-anchor="middle" style="font-family:var(--mono);font-size:11.5px;fill:var(--ink);font-weight:600">what I actually scored: 671</text>
+<text x="512.6" y="30.0" text-anchor="middle" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">inside one sigma of the promise</text>
 <text x="325.1" y="192.0" text-anchor="middle" style="font-family:var(--mono);font-size:11.5px;fill:var(--ink-soft);font-weight:600">1 in 2 billion</text>
-<text x="325.1" y="206.0" text-anchor="middle" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">for a blind picker</text>
+<text x="325.1" y="206.0" text-anchor="middle" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">of guessing this well</text>
 </svg></div>
       </div>
 
       <div class="prose">
-        <p>No. A know-nothing picker scores 392 ± 43 against the same 104 results, and the chance one of them reaches 671 is about <strong>4.5 × 10⁻¹⁰</strong>, roughly one in two billion. The machinery also kept its word: it promised 646 ± 42 and delivered 671, a z-score of <strong>+0.58</strong>. Delivery sits comfortably inside one sigma of promise, so there was no hidden overconfidence and no sandbagging. Skill earned about 646 of those points and variance donated the other 25.</p>
-        <p>The uncomfortable part is <em>where</em> the skill actually lived. A disciplined human with no model at all, mechanically picking the favourite to win 1-0 in all 104 matches, was worth 652 expected points against the model's 657. Five points across a tournament. Nobody should sell that as alpha. The probabilities themselves are a commodity: a peer-to-peer crypto exchange and a licensed Spanish bookmaker, sharing no infrastructure and no incentives, produced the same numbers to a correlation of <strong>0.9994</strong> and never once disagreed about which team was more likely to win. There is no secret probability. Every one of those 641 players could have opened the same page.</p>
+        <p>It delivered <strong>671</strong>. Not a fluke high, not a collapse: a score sitting comfortably inside one standard deviation of its own forecast. The machine said what it would do, then did it.</p>
+        <p>Meanwhile somebody guessing scores about 392. The odds of guessing your way to 671 are roughly <strong>one in two billion</strong>. That is the whole argument in one picture. <strong>In the short run the dice decide. Over 104 matches, the data does.</strong></p>
       </div>
     </section>
 
-    <!-- ============ THE ENDGAME ============ -->
+    <!-- ============ THE TWO POINTS ============ -->
     <section>
-      <div class="section-label"><span class="num">09</span><span>The endgame</span></div>
-      <h2 class="section-title">The model bought the ticket. The endgame played the hand.</h2>
+      <div class="section-label"><span class="num">09</span><span>The two points</span></div>
+      <h2 class="section-title">Then I forgot to press save.</h2>
       <div class="prose">
-        <p>Here is what the model was actually for. It never out-forecast anybody. It carried a dull, disciplined process across 104 matches until the entry was close enough to the top that the problem changed shape. Once you are genuinely in contention with four matches left, <strong>expected points stops being the right objective</strong>. Only the top three get paid, so the thing to maximise is the probability of finishing top three, and that depends on the people above you at least as much as on the football.</p>
-        <p>So the final week stopped maximising expected points and started maximising P(top 3): enumerate the rivals within reach, work out which results move them and which move us, and choose outcomes <em>correlated</em> with catching them rather than outcomes that score best on average. The pivot knowingly gave up expected points, which is exactly why the submitted picks sit below pure argmax at 646 expected. It climbed from 19th to 4th anyway. Set against a per-match model edge of five points, the pivot was worth sixteen and the podium call was worth forty.</p>
+        <p>The pool paid the top three. I finished on 711. Third place finished on 713.</p>
       </div>
 
-      <div class="score-rule">
-        <table>
-          <thead><tr><th>What actually moved the result</th><th class="pts-h">Swing</th><th class="pts-h">Nature</th></tr></thead>
-          <tbody>
-            <tr><td>Calling the podium: Spain champion, England third</td><td class="pts">+40</td><td class="nat">model</td></tr>
-            <tr><td>The endgame pivot to correlated outcomes</td><td class="pts">+16</td><td class="nat">strategy</td></tr>
-            <tr><td>A semifinal pick that never got saved in the app</td><td class="pts">-14</td><td class="nat">human error</td></tr>
-          </tbody>
-          <tfoot><tr><td>The per-match model edge over a disciplined human</td><td class="pts">+5</td><td class="nat">the model</td></tr></tfoot>
-        </table>
+      <div class="chart-card">
+        <p class="chart-title">Two points from the money</p>
+        <p class="chart-sub">Final standings, and where one unsaved pick would have put me.</p>
+        <div class="chart-scroll"><svg class="chart-svg" viewBox="0 0 680 248" role="img" aria-labelledby="finishTitle" xmlns="http://www.w3.org/2000/svg"><title id="finishTitle">Final standings: first place 732, second 714, third 713, and me on 711, two points outside the paid top three. A pick that was worked out but never saved in the app was worth 14 points, which would have finished 725, in second place.</title>
+<rect x="231.5" y="50.0" width="402.5" height="140.0" rx="4" style="fill:var(--accent);opacity:0.07"/>
+<line x1="231.5" y1="50.0" x2="231.5" y2="190.0" style="stroke:var(--rule-strong)" stroke-width="1"/>
+<text x="239.5" y="42.0" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">the money: top three</text>
+<line x1="441.5" y1="50.0" x2="441.5" y2="190.0" style="stroke:var(--accent)" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="441.5" y="26.0" text-anchor="middle" style="font-family:var(--mono);font-size:12px;fill:var(--accent);font-weight:700">725</text>
+<text x="441.5" y="39.0" text-anchor="middle" style="font-family:var(--mono);font-size:10.5px;fill:var(--accent);font-weight:600">second place</text>
+<text x="60.0" y="74.0" text-anchor="end" style="font-family:var(--mono);font-size:11.5px;fill:var(--ink-mute);font-weight:400">1st</text>
+<line x1="74.0" y1="70.0" x2="558.0" y2="70.0" style="stroke:var(--rule)" stroke-width="1"/>
+<text x="575.0" y="74.0" text-anchor="start" style="font-family:var(--mono);font-size:11px;fill:var(--ink-mute);font-weight:400">732</text>
+<circle cx="564.0" cy="70.0" r="4.5" style="fill:var(--ink-soft)"><title>1st: 732 points</title></circle>
+<text x="60.0" y="108.0" text-anchor="end" style="font-family:var(--mono);font-size:11.5px;fill:var(--ink-mute);font-weight:400">2nd</text>
+<line x1="74.0" y1="104.0" x2="243.0" y2="104.0" style="stroke:var(--rule)" stroke-width="1"/>
+<text x="260.0" y="108.0" text-anchor="start" style="font-family:var(--mono);font-size:11px;fill:var(--ink-mute);font-weight:400">714</text>
+<circle cx="249.0" cy="104.0" r="4.5" style="fill:var(--ink-soft)"><title>2nd: 714 points</title></circle>
+<text x="60.0" y="142.0" text-anchor="end" style="font-family:var(--mono);font-size:11.5px;fill:var(--ink-mute);font-weight:400">3rd</text>
+<line x1="74.0" y1="138.0" x2="225.5" y2="138.0" style="stroke:var(--rule)" stroke-width="1"/>
+<text x="242.5" y="142.0" text-anchor="start" style="font-family:var(--mono);font-size:11px;fill:var(--ink-mute);font-weight:400">713</text>
+<circle cx="231.5" cy="138.0" r="4.5" style="fill:var(--ink-soft)"><title>3rd: 713 points</title></circle>
+<text x="60.0" y="176.0" text-anchor="end" style="font-family:var(--mono);font-size:12px;fill:var(--ink);font-weight:700">Me</text>
+<line x1="74.0" y1="172.0" x2="190.5" y2="172.0" style="stroke:var(--rule)" stroke-width="1"/>
+<line x1="202.5" y1="172.0" x2="435.5" y2="172.0" style="stroke:var(--accent)" stroke-width="1.5" stroke-dasharray="3 3"/>
+<circle cx="441.5" cy="172.0" r="5.5" fill="none" style="stroke:var(--accent)" stroke-width="2"/>
+<text x="319.0" y="163.0" text-anchor="middle" style="font-family:var(--mono);font-size:10.5px;fill:var(--accent);font-weight:600">+14 never saved</text>
+<text x="185.5" y="176.0" text-anchor="end" style="font-family:var(--mono);font-size:12px;fill:var(--ink);font-weight:700">711</text>
+<circle cx="196.5" cy="172.0" r="5.5" style="fill:var(--accent)"><title>Me: 711 points</title></circle>
+<text x="179.0" y="220.0" text-anchor="middle" style="font-family:var(--mono);font-size:10px;fill:var(--ink-mute);font-weight:400">710</text>
+<text x="266.5" y="220.0" text-anchor="middle" style="font-family:var(--mono);font-size:10px;fill:var(--ink-mute);font-weight:400">715</text>
+<text x="354.0" y="220.0" text-anchor="middle" style="font-family:var(--mono);font-size:10px;fill:var(--ink-mute);font-weight:400">720</text>
+<text x="441.5" y="220.0" text-anchor="middle" style="font-family:var(--mono);font-size:10px;fill:var(--ink-mute);font-weight:400">725</text>
+<text x="529.0" y="220.0" text-anchor="middle" style="font-family:var(--mono);font-size:10px;fill:var(--ink-mute);font-weight:400">730</text>
+<text x="616.5" y="220.0" text-anchor="middle" style="font-family:var(--mono);font-size:10px;fill:var(--ink-mute);font-weight:400">735</text>
+<text x="340.0" y="237.0" text-anchor="middle" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">final points, by the rules set on day one</text>
+</svg></div>
       </div>
 
       <div class="prose">
-        <p>Which leaves the two points. The endgame enumeration modelled the five visible threats and picked correctly among them, but it only pulled podium bonuses for the rivals it could see inside the top ten. A player sitting eleventh or lower with a locked +50 podium was effectively second all along, and invisible. With that one extra screenshot the optimal pick flips from defending chalk to differentiating, and <strong>the differentiated pick would have cashed</strong>. That lesson is now written into the operating procedure: in an endgame, enumerate everyone within maximum-remaining-bonus of the cut, not everyone you happen to be able to see.</p>
-        <p>There is a blunter version of the same story. The single largest controllable loss of the whole tournament was not a probability, a model choice or a bad read of a match. It was a semifinal pick that was worked out correctly and then never saved in the app. Those 14 points would have finished <strong>725, second place, in the money</strong>. The machinery did its job for 104 matches; a save button did not.</p>
-        <p>Variance is the product, not the enemy. A 641-player pool is won in the tails, and a process that finishes 4th repeatably will sometimes lose to somebody's hot month. That is the correct trade, and it is the one this was built to make.</p>
+        <p>Here is the part that still stings. Before the semifinal I worked out the pick, the way I had for the previous 103 matches. Then I never saved it in the app. That entry was worth <strong>14 points</strong>, and 725 would have finished <strong>second, in the money</strong>.</p>
+        <p>The model was never the weak link. It ran for 104 matches, delivered exactly what it promised, and carried me from 311th into a position where I could genuinely fight for the prize. The one thing that cost me was a button I did not press.</p>
+        <p>Which is, honestly, the lesson I would keep. <strong>Trusting the data paid off over the long run. The only thing that beat it was me.</strong></p>
       </div>
     </section>
 
