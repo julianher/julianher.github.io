@@ -749,6 +749,32 @@
     margin: 0 0 16px;
     max-width: 64ch;
   }
+  .conclusion {
+    margin-top: 34px;
+    padding: 26px 30px 24px;
+    background: var(--bg-sunk);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+  }
+  .conclusion .ch {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin: 0 0 14px;
+  }
+  .conclusion p {
+    font-size: 16.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0 0 13px;
+    text-wrap: pretty;
+  }
+  .conclusion p:last-child { margin-bottom: 0; }
+  .conclusion strong { color: var(--ink); font-weight: 600; }
+
   .chart-scroll { overflow-x: auto; }
   .chart-svg { width: 100%; min-width: 560px; height: auto; display: block; }
   @media (max-width: 860px) {
@@ -1654,48 +1680,50 @@
       </div>
 
       <div class="chart-card">
-        <p class="chart-title">Two points from the money</p>
-        <p class="chart-sub">Final standings, and where one unsaved pick would have put me.</p>
-        <div class="chart-scroll"><svg class="chart-svg" viewBox="0 0 680 248" role="img" aria-labelledby="finishTitle" xmlns="http://www.w3.org/2000/svg"><title id="finishTitle">Final standings: first place 732, second 714, third 713, and me on 711, two points outside the paid top three. A pick that was worked out but never saved in the app was worth 14 points, which would have finished 725, in second place.</title>
-<rect x="231.5" y="50.0" width="402.5" height="140.0" rx="4" style="fill:var(--accent);opacity:0.07"/>
-<line x1="231.5" y1="50.0" x2="231.5" y2="190.0" style="stroke:var(--rule-strong)" stroke-width="1"/>
-<text x="239.5" y="42.0" text-anchor="start" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">the money: top three</text>
-<line x1="441.5" y1="50.0" x2="441.5" y2="190.0" style="stroke:var(--accent)" stroke-width="1.5" stroke-dasharray="4 4"/>
-<text x="441.5" y="26.0" text-anchor="middle" style="font-family:var(--mono);font-size:12px;fill:var(--accent);font-weight:700">725</text>
-<text x="441.5" y="39.0" text-anchor="middle" style="font-family:var(--mono);font-size:10.5px;fill:var(--accent);font-weight:600">second place</text>
-<text x="60.0" y="74.0" text-anchor="end" style="font-family:var(--mono);font-size:11.5px;fill:var(--ink-mute);font-weight:400">1st</text>
-<line x1="74.0" y1="70.0" x2="558.0" y2="70.0" style="stroke:var(--rule)" stroke-width="1"/>
-<text x="575.0" y="74.0" text-anchor="start" style="font-family:var(--mono);font-size:11px;fill:var(--ink-mute);font-weight:400">732</text>
-<circle cx="564.0" cy="70.0" r="4.5" style="fill:var(--ink-soft)"><title>1st: 732 points</title></circle>
-<text x="60.0" y="108.0" text-anchor="end" style="font-family:var(--mono);font-size:11.5px;fill:var(--ink-mute);font-weight:400">2nd</text>
-<line x1="74.0" y1="104.0" x2="243.0" y2="104.0" style="stroke:var(--rule)" stroke-width="1"/>
-<text x="260.0" y="108.0" text-anchor="start" style="font-family:var(--mono);font-size:11px;fill:var(--ink-mute);font-weight:400">714</text>
-<circle cx="249.0" cy="104.0" r="4.5" style="fill:var(--ink-soft)"><title>2nd: 714 points</title></circle>
-<text x="60.0" y="142.0" text-anchor="end" style="font-family:var(--mono);font-size:11.5px;fill:var(--ink-mute);font-weight:400">3rd</text>
-<line x1="74.0" y1="138.0" x2="225.5" y2="138.0" style="stroke:var(--rule)" stroke-width="1"/>
-<text x="242.5" y="142.0" text-anchor="start" style="font-family:var(--mono);font-size:11px;fill:var(--ink-mute);font-weight:400">713</text>
-<circle cx="231.5" cy="138.0" r="4.5" style="fill:var(--ink-soft)"><title>3rd: 713 points</title></circle>
-<text x="60.0" y="176.0" text-anchor="end" style="font-family:var(--mono);font-size:12px;fill:var(--ink);font-weight:700">Me</text>
-<line x1="74.0" y1="172.0" x2="190.5" y2="172.0" style="stroke:var(--rule)" stroke-width="1"/>
-<line x1="202.5" y1="172.0" x2="435.5" y2="172.0" style="stroke:var(--accent)" stroke-width="1.5" stroke-dasharray="3 3"/>
-<circle cx="441.5" cy="172.0" r="5.5" fill="none" style="stroke:var(--accent)" stroke-width="2"/>
-<text x="319.0" y="163.0" text-anchor="middle" style="font-family:var(--mono);font-size:10.5px;fill:var(--accent);font-weight:600">+14 never saved</text>
-<text x="185.5" y="176.0" text-anchor="end" style="font-family:var(--mono);font-size:12px;fill:var(--ink);font-weight:700">711</text>
-<circle cx="196.5" cy="172.0" r="5.5" style="fill:var(--accent)"><title>Me: 711 points</title></circle>
-<text x="179.0" y="220.0" text-anchor="middle" style="font-family:var(--mono);font-size:10px;fill:var(--ink-mute);font-weight:400">710</text>
-<text x="266.5" y="220.0" text-anchor="middle" style="font-family:var(--mono);font-size:10px;fill:var(--ink-mute);font-weight:400">715</text>
-<text x="354.0" y="220.0" text-anchor="middle" style="font-family:var(--mono);font-size:10px;fill:var(--ink-mute);font-weight:400">720</text>
-<text x="441.5" y="220.0" text-anchor="middle" style="font-family:var(--mono);font-size:10px;fill:var(--ink-mute);font-weight:400">725</text>
-<text x="529.0" y="220.0" text-anchor="middle" style="font-family:var(--mono);font-size:10px;fill:var(--ink-mute);font-weight:400">730</text>
-<text x="616.5" y="220.0" text-anchor="middle" style="font-family:var(--mono);font-size:10px;fill:var(--ink-mute);font-weight:400">735</text>
-<text x="340.0" y="237.0" text-anchor="middle" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">final points, by the rules set on day one</text>
+        <p class="chart-title">The final leaderboard, twice</p>
+        <p class="chart-sub">How the top of the table finished, and how it would have finished had the missing pick been entered. Same 14 points, two places, opposite side of the payout line.</p>
+        <div class="chart-scroll"><svg class="chart-svg" viewBox="0 0 680 300" role="img" aria-labelledby="boardTitle" xmlns="http://www.w3.org/2000/svg"><title id="boardTitle">The final leaderboard, twice. As it finished: Player 1 on 732, Player 2 on 714, Player 3 on 713, and me 4th on 711, just outside the paid places. With the pick I never saved, worth 14 points: I finish 2nd on 725, and Players 2 and 3 drop one place each.</title>
+<rect x="16" y="70" width="648" height="132" rx="5" style="fill:var(--accent);opacity:0.06"/>
+<text x="656.0" y="84.0" text-anchor="end" style="font-family:var(--mono);font-size:10px;fill:var(--ink-mute);font-weight:400">the money</text>
+<text x="284.0" y="48.0" text-anchor="end" style="font-family:var(--mono);font-size:11px;fill:var(--ink-soft);font-weight:600">how it finished</text>
+<text x="440.0" y="48.0" text-anchor="start" style="font-family:var(--mono);font-size:11px;fill:var(--accent);font-weight:600">if I had saved the pick</text>
+<text x="24.0" y="96.0" text-anchor="start" style="font-family:var(--mono);font-size:11px;fill:var(--ink-mute);font-weight:400">1st</text>
+<text x="24.0" y="140.0" text-anchor="start" style="font-family:var(--mono);font-size:11px;fill:var(--ink-mute);font-weight:400">2nd</text>
+<text x="24.0" y="184.0" text-anchor="start" style="font-family:var(--mono);font-size:11px;fill:var(--ink-mute);font-weight:400">3rd</text>
+<text x="24.0" y="228.0" text-anchor="start" style="font-family:var(--mono);font-size:11px;fill:var(--ink-mute);font-weight:400">4th</text>
+<line x1="308.0" y1="92.0" x2="416.0" y2="92.0" style="stroke:var(--rule-strong)" stroke-width="1.5" stroke-dasharray="4 4"/>
+<line x1="308.0" y1="136.0" x2="416.0" y2="180.0" style="stroke:var(--rule-strong)" stroke-width="1.5" stroke-dasharray="4 4"/>
+<line x1="308.0" y1="180.0" x2="416.0" y2="224.0" style="stroke:var(--rule-strong)" stroke-width="1.5" stroke-dasharray="4 4"/>
+<line x1="308.0" y1="224.0" x2="416.0" y2="136.0" style="stroke:var(--accent)" stroke-width="2.5"/>
+<text x="284.0" y="96.0" text-anchor="end" style="font-family:var(--mono);font-size:11px;fill:var(--ink-mute);font-weight:400">Player 1 · 732</text>
+<circle cx="300" cy="92" r="4" style="fill:var(--ink-soft)"><title>Player 1: 732 points</title></circle>
+<text x="284.0" y="140.0" text-anchor="end" style="font-family:var(--mono);font-size:11px;fill:var(--ink-mute);font-weight:400">Player 2 · 714</text>
+<circle cx="300" cy="136" r="4" style="fill:var(--ink-soft)"><title>Player 2: 714 points</title></circle>
+<text x="284.0" y="184.0" text-anchor="end" style="font-family:var(--mono);font-size:11px;fill:var(--ink-mute);font-weight:400">Player 3 · 713</text>
+<circle cx="300" cy="180" r="4" style="fill:var(--ink-soft)"><title>Player 3: 713 points</title></circle>
+<text x="284.0" y="228.0" text-anchor="end" style="font-family:var(--mono);font-size:11.5px;fill:var(--ink);font-weight:700">Me · 711</text>
+<circle cx="300" cy="224" r="5.5" style="fill:var(--accent)"><title>Me: 711 points</title></circle>
+<text x="440.0" y="96.0" text-anchor="start" style="font-family:var(--mono);font-size:11px;fill:var(--ink-mute);font-weight:400">Player 1 · 732</text>
+<circle cx="424" cy="92" r="4" style="fill:var(--ink-soft)"><title>Player 1: 732 points</title></circle>
+<text x="440.0" y="140.0" text-anchor="start" style="font-family:var(--mono);font-size:11.5px;fill:var(--ink);font-weight:700">Me · 725</text>
+<circle cx="424" cy="136" r="5.5" style="fill:var(--accent)"><title>Me: 725 points</title></circle>
+<text x="440.0" y="184.0" text-anchor="start" style="font-family:var(--mono);font-size:11px;fill:var(--ink-mute);font-weight:400">Player 2 · 714</text>
+<circle cx="424" cy="180" r="4" style="fill:var(--ink-soft)"><title>Player 2: 714 points</title></circle>
+<text x="440.0" y="228.0" text-anchor="start" style="font-family:var(--mono);font-size:11px;fill:var(--ink-mute);font-weight:400">Player 3 · 713</text>
+<circle cx="424" cy="224" r="4" style="fill:var(--ink-soft)"><title>Player 3: 713 points</title></circle>
+<text x="340.0" y="284.0" text-anchor="middle" style="font-family:var(--mono);font-size:10.5px;fill:var(--ink-mute);font-weight:400">final points, by the rules set on day one</text>
 </svg></div>
       </div>
 
       <div class="prose">
-        <p>Here is the part that still stings. Before the semifinal I worked out the pick, the way I had for the previous 103 matches. Then I never saved it in the app. That entry was worth <strong>14 points</strong>, and 725 would have finished <strong>second, in the money</strong>.</p>
-        <p>The model was never the weak link. It ran for 104 matches, delivered exactly what it promised, and carried me from 311th into a position where I could genuinely fight for the prize. The one thing that cost me was a button I did not press.</p>
-        <p>Which is, honestly, the lesson I would keep. <strong>Trusting the data paid off over the long run. The only thing that beat it was me.</strong></p>
+        <p>Here is the part that still stings. Before the semifinal I worked out the pick, exactly as I had for the previous 103 matches. Then I never saved it in the app. Those <strong>14 points</strong> were the difference between fourth place and second, and the two players I would have passed both finished within three points of me.</p>
+      </div>
+
+      <div class="conclusion">
+        <p class="ch">The verdict</p>
+        <p>The experiment worked, and it beat its own forecast. The model promised 646 points and delivered <strong>671</strong>. It took me from 311th of 641 to a seat at the top table, using probabilities that were free, public, and available to all 641 players. The edge was never secret information. It was using the same numbers everyone had, consistently, and converting them for the rule that actually paid.</p>
+        <p>It also taught me something a backtest never would. A process can be sound for 104 matches and still be undone by the softest component in the system, which in this case was <strong>me forgetting to press save</strong>. That is not a modelling risk, it is an operational one, and it is exactly the kind that survives into real deployments where the model is only ever one part of the pipeline.</p>
+        <p><strong>Trust the data over the long run. Then go and check that it actually got saved.</strong></p>
       </div>
     </section>
 
