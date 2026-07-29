@@ -1239,6 +1239,7 @@
       <div class="prose">
         <p>If any single forecaster had a real edge, these two would drift apart. They do not. The points sit on the diagonal, they disagree by about half a percentage point on average, and across 104 matches they never once named a different favourite. That is what a global consensus looks like when you plot it.</p>
         <p>And it was not just self-consistent, it was right: teams the market made favourites went on to win <strong>62.5%</strong> of the time, against <strong>61.1%</strong> predicted. Nobody in the pool was information-poor either. These prices were free and public, and any of the 641 players could have opened the same page.</p>
+        <p>There is a habit worth unlearning in that. Faced with a prediction problem the instinct is to assume you need more data and a cleverer model, and often you do. But sometimes the number you are trying to compute <em>already exists</em>: published, free, and produced by more computing power and expertise than any of us will assemble at a kitchen table. Building your own version from scratch is an excellent way to learn how it works, and I would still do it. Shipping your own version, when a better one is sitting there for nothing, is just overcomplicating the problem. The skill is knowing which of the two situations you are in.</p>
         <p>So I stopped trying to beat that number and started asking a different question: everyone can see the same probabilities, but what do you actually <em>submit</em> when the pool pays 5 / 2 / 2 / 1 for a scoreline? That question the market does not answer, and that is where the rest of this project lives.</p>
       </div>
     </section>
@@ -1721,7 +1722,7 @@
 
       <div class="conclusion">
         <p class="ch">The verdict</p>
-        <p>The experiment worked, and it beat its own forecast. The model promised 646 points and delivered <strong>671</strong>. It took me from 311th of 641 to a seat at the top table, using probabilities that were free, public, and available to all 641 players. The edge was never secret information. It was using the same numbers everyone had, consistently, and converting them for the rule that actually paid.</p>
+        <p>The experiment worked, and it beat its own forecast. The model promised 646 points and delivered <strong>671</strong>. It took me from 311th of 641 to a seat at the top table, using probabilities that were free, public, and available to all 641 players. The edge was never secret information. It was using the same numbers everyone had, consistently, and converting them for the rule that actually paid. The hardest discipline was resisting the urge to build something more complicated.</p>
         <p>It also taught me something a backtest never would. A process can be sound for 104 matches and still be undone by the softest component in the system, which in this case was <strong>me forgetting to press save</strong>. That is not a modelling risk, it is an operational one, and it is exactly the kind that survives into real deployments where the model is only ever one part of the pipeline.</p>
         <p><strong>Trust the data over the long run. Then go and check that it actually got saved.</strong></p>
       </div>
