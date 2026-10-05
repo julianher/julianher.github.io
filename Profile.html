@@ -48,13 +48,23 @@
     background-size: 24px 24px;
     opacity: 0.7;
   }
-  .banner img {
+  .banner img,
+  .banner canvas {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: 50% 100%;
   }
+  /* live pixel-art layer (pixel-miami.js), faded in over the photo once drawn */
+  .banner canvas {
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  .banner canvas.is-live { opacity: 1; }
 
   .header-body {
     position: relative;
@@ -414,6 +424,7 @@
     <section class="profile-card" aria-label="Profile header" style="margin-top:0;">
       <div class="banner" aria-hidden="true">
         <img src="background.jpeg" alt="">
+        <canvas width="313" height="78" data-src="pixel-miami.png"></canvas>
       </div>
 
       <div class="header-body">
@@ -661,5 +672,6 @@
     </footer>
 
   </main>
+<script src="pixel-miami.js"></script>
 </body>
 </html>
