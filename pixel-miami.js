@@ -675,12 +675,17 @@
   build();
   draw(still ? 14 : t);
   canvas.classList.add("is-live");
-  window.addEventListener("resize", () => {
+  // rebuild whenever the banner changes width: window resizes, but also a scrollbar
+  // appearing or a page that first lays out before it has its final size
+  const refit = () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
       if (Math.ceil(banner.clientWidth / S) !== W) { build(); draw(still ? 14 : Math.floor(t * FPS) / FPS); }
-    }, 150);
-  });
+    }, 100);
+  };
+  if ("ResizeObserver" in window) new ResizeObserver(refit).observe(banner);
+  window.addEventListener("resize", refit);
+  document.addEventListener("visibilitychange", refit);
   if (still) return;
   document.addEventListener("visibilitychange", run);
   if ("IntersectionObserver" in window)
